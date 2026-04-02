@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dr. Hugo Ary Oliveira, neurologista em Brasília especialista em Cognição e Comportamento. Atua com problemas de memória, TDAH, Alzheimer, Autismo Adulto e Dificuldade de Aprendizado. CRM-DF 19610." />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="icon" href="./assets/img/brain-vector.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Dr.Hugo Ary Oliveira</title>
+  </head>
+  <body>
+    <header class="l-header">
+      <nav class="nav">
+        <div>
+          <a href="#home" class="nav__logo">
+            <img
+              src="./assets/img/logo.svg"
+              alt="logomarca doutor hugo silva neurologista"
+              class="logo__img"
+            />
+          </a>
+        </div>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link">HOME</a>
+              <span class="nav__line"></span>
+            </li>
+            <li class="nav__item">
+              <a href="#sobre" class="nav__link">SOBRE</a>
+              <span class="nav__line"></span>
+            </li>
+            <li class="nav__item">
+              <a href="#especialidades" class="nav__link">ESPECIALIDADES</a>
+              <span class="nav__line"></span>
+            </li>
+            <li class="nav__item">
+              <a href="#clinicas" class="nav__link">CLÍNICAS</a>
+              <span class="nav__line"></span>
+            </li>
+            <li class="nav__item">
+              <a href="./avaliacao-neurocognitiva.html" class="nav__link">AVALIAÇÃO NEUROCOGNITIVA</a>
+              <span class="nav__line"></span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mb__menu__icon">
+          <button onclick="menuShow()" class="mb__menu__btn" aria-label="Abrir menu de navegação">
+            <img src="./assets/img/bar-icon.svg" alt="" class="icon" />
+          </button>
+        </div>
+      </nav>
+
+      <div class="mb__menu">
+        <ul class="nav__list">
+          <li onclick="chooseSection()" class="nav__item">
+            <a href="#home" class="nav__link">HOME</a>
+            <span class="nav__line"></span>
+          </li>
+          <li onclick="chooseSection()" class="nav__item">
+            <a href="#sobre" class="nav__link">SOBRE</a>
+            <span class="nav__line"></span>
+          </li>
+          <li onclick="chooseSection()" class="nav__item">
+            <a href="#especialidades" class="nav__link">ESPECIALIDADES</a>
+            <span class="nav__line"></span>
+          </li>
+          <li onclick="chooseSection()" class="nav__item">
+            <a href="#clinicas" class="nav__link">CLÍNICAS</a>
+            <span class="nav__line"></span>
+          </li>
+          <li onclick="chooseSection()" class="nav__item">
+            <a href="./avaliacao-neurocognitiva.html" class="nav__link">AVALIAÇÃO NEUROCOGNITIVA</a>
+            <span class="nav__line"></span>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="l-main">
+      <section class="home" id="home">
+        <div class="home__data">
+          <h1 class="home__title">
+            DR. HUGO ARY OLIVEIRA <br />
+            NEUROLOGISTA
+          </h1>
+          <p class="home__subtitle">CRM-DF 19610 / RQE 17996</p>
+          <p class="home__info">
+            Neurologista <br />
+            Especialista em Cognição e Comportamento
+          </p>
+          <a
+            href="https://wa.me/556139991126"
+            class="btn"
+            target="_blank"
+            >FALE AGORA</a
+          >
+          <a href="#sobre" class="btn btn--transparent"> SAIBA MAIS </a>
+        </div>
+        <img
+          src="./assets/img/brain-image.png"
+          alt="imagem de um cérebro"
+          class="home__img"
+        />
+      </section>
+
+      <section class="about" id="sobre">
+        <img
+          src="./assets/img/hugo.jpg"
+          alt="desenho de um cérebro"
+          class="about__img"
+        />
+        <div class="about__data">
+          <h2 class="about__title">SOBRE</h2>
+          <span class="line__title"></span>
+
+          <ul class="about__info">
+            <li class="about__item">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="ícone de cérebro"
+                class="about__icon"
+              />
+              Médico formado pela Universidade Católica de Brasília (UCB).
+            </li>
+            <li class="about__item">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="ícone de cérebro"
+                class="about__icon"
+              />
+              Neurologista pelo Hospital de Base do Distrito Federal.
+            </li>
+            <li class="about__item">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="ícone de cérebro"
+                class="about__icon"
+              />
+              Especialista em Cognição e Comportamento pela Universidade Federal
+              de São Paulo (UNIFESP).
+            </li>
+            <li class="about__item">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="ícone de cérebro"
+                class="about__icon"
+              />
+              Pós-graduado em Transtornos do Neurodesenvolvimento.
+            </li>
+          </ul>
+
+          <a href="https://wa.me/556139991126" class="btn" target="_blank">
+            FALE AGORA
+          </a>
+        </div>
+      </section>
+
+      <section class="services" id="especialidades">
+        <div class="services__data">
+          <h2 class="services__title">ESPECIALIDADES</h2>
+          <span class="line__title"></span>
+          <div class="services__wrapper">
+            <div class="services__card">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="icone de um cérebro"
+                class="services__card__icon"
+              />
+              <p class="services__card__text">Problemas de memória</p>
+            </div>
+            <div class="services__card">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="icone de um cérebro"
+                class="services__card__icon"
+              />
+              <p class="services__card__text">TDAH</p>
+            </div>
+            <div class="services__card">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="icone de um cérebro"
+                class="services__card__icon"
+              />
+              <p class="services__card__text">
+                Doença de Alzheimer e Outros Transtornos
+              </p>
+            </div>
+            <div class="services__card">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="icone de um cérebro"
+                class="services__card__icon"
+              />
+              <p class="services__card__text">
+                Transtorno do Espectro Autista Adulto
+              </p>
+            </div>
+            <div class="services__card">
+              <img
+                src="./assets/img/brain-vector.svg"
+                alt="icone de um cérebro"
+                class="services__card__icon"
+              />
+              <p class="services__card__text">Dificuldade de Aprendizado</p>
+            </div>
+          </div>
+
+          <a
+            href="https://wa.me/556139991126"
+            class="btn"
+            target="_blank"
+            >FALE AGORA</a
+          >
+        </div>
+      </section>
+
+      <section class="local" id="clinicas">
+        <h2 class="local__title">LOCALIDADES</h2>
+        <span class="line__title"></span>
+        <div class="local__wrapper">
+          
+          <div class="local__card">
+            <p class="card__title">Centro de Aneurisma Cerebral</p>
+            <p class="local__card__text">
+              SGAS II St de grandes áreas sul 616 - Ed Linea Vita - bloco A
+              salas 201 202 e 204.
+            </p>
+            <p class="local__card__text">
+                <i class="fa-solid fa-phone"></i> (61) 99827-1090
+            </p>
+            <a
+              href="https://www.google.com/maps/place/Centro+de+Aneurisma+Cerebral/@-15.8399834,-47.9204441,15z/data=!4m2!3m1!1s0x0:0xaaf18d0923b8e174?sa=X&ved=2ahUKEwj5wNryz6eAAxVCK7kGHf7tD1wQ_BJ6BAhDEAA&ved=2ahUKEwj5wNryz6eAAxVCK7kGHf7tD1wQ_BJ6BAhLEAg"
+              class="btn"
+              target="_blank"
+              >LOCALIZAÇÃO</a
+            >
+          </div>
+
+          <div class="local__card">
+            <p class="card__title">Centro Médico Santa Luzia</p>
+            <p class="local__card__text">
+              Edifício OHB SHLS 716 Conjunto A Bloco B - Asa sul.
+            </p>
+            <p class="local__card__text">
+                <i class="fa-solid fa-phone"></i> (61) 99122-5014
+            </p>
+            <a
+              href="https://www.google.com/maps/place/Centro+M%C3%A9dico+Santa+Luzia:+Consultas,+Centro+M%C3%A9dico,+Multicl%C3%ADnica,+Cl%C3%ADnica+M%C3%A9dica,+Bras%C3%ADlia+DF/@-15.8258699,-47.9287773,15z/data=!4m6!3m5!1s0x935a31cbc9e81fdb:0x6384e252cd146530!8m2!3d-15.8258699!4d-47.9287773!16s%2Fg%2F11g0j6tjkg?entry=ttu"
+              class="btn"
+              target="_blank"
+              >LOCALIZAÇÃO</a
+            >
+          </div>
+
+          <div class="local__card">
+            <p class="card__title">Hospital DF Star</p>
+            <p class="local__card__text">
+              SGAS 914 Conjunto B Lote 68A - Asa Sul.
+            </p>
+            <p class="local__card__text">
+                <i class="fa-solid fa-phone"></i> (61) 99929-1934
+            </p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Hospital+DF+Star+Brasilia"
+              class="btn"
+              target="_blank"
+              >LOCALIZAÇÃO</a
+            >
+          </div>
+
+          <div class="local__card">
+            <p class="card__title">Clínica Neurostart</p>
+            <p class="local__card__text">
+              SGAS 915 - Centro Clínico Advance 1.
+            </p>
+            <p class="local__card__text">
+                <i class="fa-solid fa-phone"></i> (61) 3999-1126
+            </p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Neurostart+Brasilia"
+              class="btn"
+              target="_blank"
+              >LOCALIZAÇÃO</a
+            >
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="l-footer">
+      <div class="footer__data">
+        <img
+          src="./assets/img/logo.svg"
+          alt="logomarca doutor hugo silva neurologista"
+          class="footer__logo"
+        />
+        <div class="footer__info">
+          <p class="footer__text">
+            Neurologista <br />
+            Especialista em Cognição e Comportamento
+          </p>
+          <p class="footer__text">CRM-DF 19610 / RQE 17996</p>
+          <p class="footer__phone">
+            <i class="fa-brands fa-whatsapp" style="color: #4fbe89"></i>61
+            3999-1126
+          </p>
+        </div>
+      </div>
+      <div class="footer__rights">
+        <p>Dr.Hugo Ary Oliveira © 2026 - Todos os direitos reservados</p>
+        <p>
+          Desenvolvido por
+          <a
+            target="_blank"
+            href="mailto:raionylucas7@gmail.com?subject=Desenvolvimento de Website"
+            >Lucas Raiony</a
+          >
+        </p>
+      </div>
+    </footer>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
