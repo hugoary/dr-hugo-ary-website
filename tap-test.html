@@ -142,6 +142,22 @@
       ];
       const BAL_MAX = 16, GAIT_MAX = 12, TIN_MAX = 28;
 
+      const REFERENCES = [
+        "Hakim S, Adams RD. The special clinical problem of symptomatic hydrocephalus with normal cerebrospinal fluid pressure. J Neurol Sci. 1965;2(4):307-327.",
+        "Evans WA. An encephalographic ratio for estimating ventricular enlargement and cerebral atrophy. Arch Neurol Psychiatr. 1942;47:931-937. (Índice de Evans — valor de referência > 0,33 utilizado neste serviço)",
+        "Tinetti ME. Performance-oriented assessment of mobility problems in elderly patients. J Am Geriatr Soc. 1986;34(2):119-126.",
+        "Podsiadlo D, Richardson S. The Timed \"Up & Go\": a test of basic functional mobility for frail elderly persons. J Am Geriatr Soc. 1991;39(2):142-148.",
+        "Relkin N, Marmarou A, Klinge P, Bergsneider M, Black PM. Diagnosing idiopathic normal-pressure hydrocephalus. Neurosurgery. 2005;57(3 Suppl):S4-S16.",
+        "Marmarou A, Bergsneider M, Klinge P, Relkin N, Black PM. The value of supplemental prognostic tests for the preoperative assessment of idiopathic normal-pressure hydrocephalus. Neurosurgery. 2005;57(3 Suppl):S17-S28.",
+        "Mori E, Ishikawa M, Kato T, et al. Guidelines for management of idiopathic normal pressure hydrocephalus: second edition. Neurol Med Chir (Tokyo). 2012;52(11):775-809. (Critérios de resposta ao TAP TEST: melhora ≥ 20% no TUG ou ≥ 10% no Tinetti)",
+        "Wikkelsø C, Hellström P, Klinge PM, Tans JT; European iNPH Multicentre Study Group. The European iNPH Multicentre Study on the predictive values of resistance to CSF outflow and the CSF Tap Test in patients with idiopathic normal pressure hydrocephalus. J Neurol Neurosurg Psychiatry. 2013;84(5):562-568.",
+        "Hashimoto M, Ishikawa M, Mori E, Kuwana N; SINPHONI. Diagnosis of idiopathic normal pressure hydrocephalus is supported by MRI-based scheme: a prospective cohort study. Cerebrospinal Fluid Res. 2010;7:18. (DESH — Disproportionately Enlarged Subarachnoid-space Hydrocephalus)",
+        "Fazekas F, Chawluk JB, Alavi A, Hurtig HI, Zimmerman RA. MR signal abnormalities at 1.5 T in Alzheimer's dementia and normal aging. AJR Am J Roentgenol. 1987;149(2):351-356. (Escala Fazekas — hiperintensidades da substância branca)",
+        "Scheltens P, Leys D, Barkhof F, et al. Atrophy of medial temporal lobes on MRI in \"probable\" Alzheimer's disease and normal ageing. J Neurol Neurosurg Psychiatry. 1992;55(10):967-972. (Escala MTA — Medial Temporal Atrophy)",
+        "Ishii K, Kanda T, Harada A, et al. Clinical impact of the callosal angle in the diagnosis of idiopathic normal pressure hydrocephalus. Eur Radiol. 2008;18(11):2678-2683. (Ângulo do corpo caloso)",
+        "Pressão de abertura liquórica de referência neste serviço: limite superior de 26 cmH₂O. Valores acima sugerem reavaliação do diagnóstico de HPN idiopática.",
+      ];
+
       const INITIAL_DATA = {
         initials:"", birthdate:"", age:"", gender:"", schooling:"",
         requestingDoctor:"", indication:"Suspeita de HPN", evalDate:new Date().toISOString().split("T")[0], location:"",
