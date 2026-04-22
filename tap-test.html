@@ -161,10 +161,10 @@
       const INITIAL_DATA = {
         initials:"", birthdate:"", age:"", gender:"", schooling:"",
         requestingDoctor:"", indication:"Suspeita de HPN", evalDate:new Date().toISOString().split("T")[0], location:"",
-        comorbidities:"", medications:"", companion:"", clinicalHistory:"",
-        triad_gait_time:"", triad_gait_note:"",
-        triad_sphincter_time:"", triad_sphincter_note:"",
-        triad_cognitive_time:"", triad_cognitive_note:"",
+        comorbidities:"", medications:"", companion:"",
+        triad_gait_time:"",
+        triad_sphincter_time:"",
+        triad_cognitive_time:"",
         mri_date:"", mri_mta:"", mri_fazekas:"", mri_callosal:"", mri_desh:"", mri_evans:"", mri_notes:"",
         pre_tug:"", pos_tug:"",
         pre_bal:{}, pre_gait:{}, pos_bal:{}, pos_gait:{},
@@ -468,18 +468,14 @@
                   <Field label="Comorbidades" wide><input type="text" value={data.comorbidities} onChange={e => set("comorbidities", e.target.value)} placeholder="Ex.: DM, HAS, depressão" /></Field>
                   <Field label="Medicações em uso" wide><input type="text" value={data.medications} onChange={e => set("medications", e.target.value)} placeholder="Ex.: levotiroxina, quetiapina 200mg, trazodona 50mg" /></Field>
                   <Field label="Acompanhante" wide><input type="text" value={data.companion} onChange={e => set("companion", e.target.value)} placeholder="Ex.: irmã, filho, cônjuge" /></Field>
-                  <Field label="História Clínica / Queixas adicionais" wide><textarea value={data.clinicalHistory} onChange={e => set("clinicalHistory", e.target.value)} placeholder="Descrição livre do quadro clínico, antecedentes, evolução..."/></Field>
                 </div>
               </Section>
 
               <Section number="2" title="Tríade de Hakim-Adams">
                 <div className="grid-2">
-                  <Field label="Alteração da marcha — tempo / características" wide><input type="text" value={data.triad_gait_time} onChange={e => set("triad_gait_time", e.target.value)} placeholder="Ex.: há 3 anos, inespecífica de longa data" /></Field>
-                  <Field label="Observações sobre a marcha" wide><input type="text" value={data.triad_gait_note} onChange={e => set("triad_gait_note", e.target.value)} placeholder="Ex.: marcha magnética, passos curtos, dificuldade transitória..." /></Field>
-                  <Field label="Alteração esfincteriana — tempo" wide><input type="text" value={data.triad_sphincter_time} onChange={e => set("triad_sphincter_time", e.target.value)} placeholder="Ex.: há 10 anos" /></Field>
-                  <Field label="Observações esfincterianas" wide><input type="text" value={data.triad_sphincter_note} onChange={e => set("triad_sphincter_note", e.target.value)} placeholder="Ex.: urgeincontinência com melhora após spasmex" /></Field>
-                  <Field label="Déficit cognitivo amnéstico — tempo" wide><input type="text" value={data.triad_cognitive_time} onChange={e => set("triad_cognitive_time", e.target.value)} placeholder="Ex.: sem queixa consistente" /></Field>
-                  <Field label="Observações cognitivas" wide><input type="text" value={data.triad_cognitive_note} onChange={e => set("triad_cognitive_note", e.target.value)} placeholder="Ex.: síndrome amnéstica sem queixa consistente" /></Field>
+                  <Field label="Alteração da marcha — sintoma e tempo" wide><input type="text" value={data.triad_gait_time} onChange={e => set("triad_gait_time", e.target.value)} placeholder="Ex.: marcha magnética há 3 anos" /></Field>
+                  <Field label="Alteração esfincteriana — sintoma e tempo" wide><input type="text" value={data.triad_sphincter_time} onChange={e => set("triad_sphincter_time", e.target.value)} placeholder="Ex.: urgeincontinência há 10 anos com melhora após spasmex" /></Field>
+                  <Field label="Déficit cognitivo amnéstico — sintoma e tempo" wide><input type="text" value={data.triad_cognitive_time} onChange={e => set("triad_cognitive_time", e.target.value)} placeholder="Ex.: sem queixa consistente de declínio cognitivo" /></Field>
                 </div>
               </Section>
 
@@ -677,10 +673,9 @@
                   <tr><td colSpan="4">
                     <b>História Clínica:</b><br/>
                     {data.companion && <>Acompanhante — {data.companion}<br/></>}
-                    {data.triad_gait_note && <>Alteração Marcha — {data.triad_gait_note}<br/></>}
-                    {data.triad_sphincter_note && <>Alterações esfincterianas — {data.triad_sphincter_note}<br/></>}
-                    {data.triad_cognitive_note && <>Síndrome cognitiva — {data.triad_cognitive_note}<br/></>}
-                    {data.clinicalHistory && <>{data.clinicalHistory}</>}
+                    {data.triad_gait_time && <>Alteração de marcha — {data.triad_gait_time}<br/></>}
+                    {data.triad_sphincter_time && <>Alteração esfincteriana — {data.triad_sphincter_time}<br/></>}
+                    {data.triad_cognitive_time && <>Déficit cognitivo — {data.triad_cognitive_time}</>}
                   </td></tr>
                 </tbody>
               </table>
