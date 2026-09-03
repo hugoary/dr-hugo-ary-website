@@ -270,7 +270,7 @@ const INITIAL_DATA = {
   pl_notes: "",
   conclusion: "",
   conclusion_manual: false,
-  examiner: "Dr Hugo Ary O R Silva — Neurologista, Especialidade Cognição e Comportamento — CRM-DF 19610 — RQE 17.996"
+  examiner: "Dr. Hugo Ary Oliveira Silva — Neurologista, Especialidade Cognição e Comportamento — CRM-DF 19610 — RQE 17.996"
 };
 
 /* ═══ HELPERS ═══ */
@@ -598,7 +598,7 @@ function TapTestApp() {
     className: "hdr-text"
   }, /*#__PURE__*/React.createElement("h1", null, "TAP TEST"), /*#__PURE__*/React.createElement("p", null, "AVALIA\xC7\xC3O DE RESPOSTA \xC0 PUN\xC7\xC3O LOMBAR"), /*#__PURE__*/React.createElement("p", {
     className: "hdr-doc"
-  }, "Dr. Hugo Ary Oliveira \xB7 CRM-DF 19610 \xB7 RQE 17996"))), /*#__PURE__*/React.createElement("div", {
+  }, "Dr. Hugo Ary Oliveira Silva \xB7 CRM-DF 19610 \xB7 RQE 17996"))), /*#__PURE__*/React.createElement("div", {
     className: "hdr-actions"
   }, /*#__PURE__*/React.createElement("a", {
     href: "./index.html",
