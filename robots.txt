@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Rascunho sem extensão na raiz — não deve ser indexado.
+Disallow: /dev
+
+Sitemap: https://drhugoary.com.br/sitemap.xml
