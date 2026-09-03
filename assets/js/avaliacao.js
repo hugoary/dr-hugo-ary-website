@@ -1911,7 +1911,7 @@ function PrintView({
     className: "pv-h2"
   }, isMoCA ? "Montreal Cognitive Assessment (MoCA) — UNIFESP" : "Avaliação Neurocognitiva — V-01"), /*#__PURE__*/React.createElement("p", {
     className: "pv-h3"
-  }, "Dr Hugo Ary Oliveira Silva \u2014 Neurologista Cogni\xE7\xE3o e Comportamento \xB7 CRM-DF 19610 \xB7 RQE 17996"))), /*#__PURE__*/React.createElement("div", {
+  }, "Dr. Hugo Ary Oliveira Silva \u2014 Neurologista Cogni\xE7\xE3o e Comportamento \xB7 CRM-DF 19610 \xB7 RQE 17996"))), /*#__PURE__*/React.createElement("div", {
     className: "pv-hdr-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "pv-hf"
@@ -2594,7 +2594,7 @@ function NeuroCogAssessment() {
     className: "header-text"
   }, /*#__PURE__*/React.createElement("h1", null, "Avalia\xE7\xE3o Neurocognitiva"), /*#__PURE__*/React.createElement("p", {
     className: "header-doc"
-  }, "Dr Hugo Ary Oliveira Silva \u2014 Neurologista Cogni\xE7\xE3o e Comportamento"), /*#__PURE__*/React.createElement("p", null, "CRM-DF 19610 \xB7 RQE 17996"))), /*#__PURE__*/React.createElement("div", {
+  }, "Dr. Hugo Ary Oliveira Silva \u2014 Neurologista Cogni\xE7\xE3o e Comportamento"), /*#__PURE__*/React.createElement("p", null, "CRM-DF 19610 \xB7 RQE 17996"))), /*#__PURE__*/React.createElement("div", {
     className: "header-actions"
   }, /*#__PURE__*/React.createElement("div", {
     className: "test-toggle"
