@@ -1,4 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Poppins:wght@400;500&display=swap");
+/* As fontes (Montserrat/Poppins) são carregadas por <link> no <head> do
+   HTML, com preconnect, em vez de @import aqui: evita a cadeia
+   CSS -> Google Fonts que atrasa a primeira renderização. */
+
+/* Ícones inline em SVG (substituem o Font Awesome, que baixava a biblioteca
+   inteira para três ícones). */
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
+.svg-icon--nav {
+  margin-right: 6px;
+  color: #2d7db0;
+}
+.svg-icon--whatsapp {
+  color: #4fbe89;
+}
 
 .mb__menu,
 .nav {
