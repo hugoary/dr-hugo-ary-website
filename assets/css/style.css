@@ -32,6 +32,8 @@
   --font-regular: 400;
   --font-medium: 500;
   --green: #54c791;
+  --green-hover: #45b581;
+  --green-dark: #2f8a60;
   --white: #fff;
   --offwhite: #f5f7f6;
   --black: #000;
@@ -41,6 +43,9 @@
   --p-font-size: 1rem;
   --card-font-size: 0.87rem;
   --small-font-size: 0.75rem;
+  --nav-height: 56px;
+  --section-padding: 112px;
+  --gutter: 88px;
 }
 * {
   box-sizing: border-box;
@@ -49,23 +54,35 @@
 }
 body {
   font-family: Montserrat, sans-serif;
+  line-height: 1.5;
 }
 html {
   scroll-behavior: smooth;
 }
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+/* A nav é fixa: ao navegar por âncora, o topo da seção não fica escondido
+   atrás dela. */
+section[id] {
+  scroll-margin-top: var(--nav-height);
+}
 .nav {
   width: 100%;
-  height: 56px;
-  padding: 0 88px;
+  height: var(--nav-height);
+  padding: 0 var(--gutter);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 40px;
   background: var(--white);
   z-index: 100;
 }
 .nav__list {
   display: flex;
-  gap: 50px;
+  gap: 40px;
 }
 .nav__item {
   list-style-type: none;
@@ -92,16 +109,21 @@ html {
 .nav__link {
   font-size: var(--small-font-size);
   font-weight: var(--font-medium);
+  white-space: nowrap;
 }
 .nav__item:hover .nav__link {
-  color: var(--green);
+  color: var(--green-dark);
 }
+/* Botão do menu móvel com área de toque de ~50×41px (o ícone tem 26×17). */
 .mb__menu__btn {
+  display: inline-flex;
+  padding: 12px;
+  margin-right: -12px;
   border: none;
   background: 0 0;
+  cursor: pointer;
 }
 .mb__menu {
-  justify-content: center;
   padding-top: 100px;
   background: var(--white);
   width: 100%;
@@ -115,9 +137,11 @@ html {
 .mb__menu .nav__list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 12px;
 }
 .mb__menu .nav__link {
+  display: block;
+  padding: 8px 16px;
   font-size: var(--p-font-size);
 }
 .home {
@@ -125,13 +149,24 @@ html {
   height: 100vh;
   justify-content: space-between;
   align-items: center;
-  padding: 56px 88px 0;
+  gap: 40px;
+  padding: var(--nav-height) var(--gutter) 0;
   background-color: var(--offwhite);
 }
 .home__title {
   font-size: var(--h1-font-size);
   font-weight: var(--font-regular);
+  line-height: 1.15;
   margin: 0 16px 16px 0;
+}
+/* "NEUROLOGISTA" continua dentro do h1 (SEO), mas como linha de apoio ao
+   nome, em vez de competir com ele no mesmo tamanho. */
+.home__title__role {
+  display: block;
+  font-size: 0.55em;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.12em;
+  margin-top: 0.35em;
 }
 .home__info,
 .home__subtitle {
@@ -144,16 +179,17 @@ html {
   margin-bottom: 56px;
 }
 .home__img {
-  max-width: 456px;
+  /* Entre 993 e 1200px a ilustração cede um pouco para o texto respirar. */
+  max-width: min(456px, 36vw);
   max-height: 480px;
   width: auto;
   height: auto;
 }
 .about {
   width: 100%;
-  height: 100vh;
   align-items: center;
-  padding: 0 88px;
+  gap: var(--gutter);
+  padding: var(--section-padding) var(--gutter);
 }
 .about__info,
 .services {
@@ -163,16 +199,20 @@ html {
 /* A foto declara width/height no HTML (evita layout shift). Como o CSS
    sobrescreve só a largura, a altura precisa voltar a "auto" para a
    proporção original ser mantida — sem isso a imagem fica esticada. */
+.about > picture {
+  flex: 0 1 450px;
+  min-width: 0;
+}
 .about__img {
   display: block;
-  margin-right: 88px;
-  width: 450px;
+  width: 100%;
   max-width: 100%;
   height: auto;
   border-radius: 15px;
 }
 .about__data {
-  width: 50%;
+  flex: 1 1 50%;
+  min-width: 0;
 }
 .about__title,
 .local__title,
@@ -181,8 +221,8 @@ html {
   font-weight: var(--font-regular);
   margin-bottom: 4px;
 }
-.about__info,
-.about__info:nth-child(3) {
+.about__info {
+  gap: 40px;
   margin-bottom: 80px;
 }
 .line__title {
@@ -191,9 +231,6 @@ html {
   height: 1px;
   background: var(--green);
   margin-bottom: 84px;
-}
-.about__info {
-  gap: 40px;
 }
 .about__item {
   display: flex;
@@ -207,10 +244,9 @@ html {
 }
 .services {
   width: 100%;
-  height: 100vh;
   align-items: center;
   justify-content: center;
-  padding: 0 88px;
+  padding: var(--section-padding) var(--gutter);
   background: var(--offwhite);
 }
 .services__card,
@@ -219,19 +255,24 @@ html {
   flex-direction: column;
 }
 .services__data {
+  width: 100%;
   align-items: center;
   justify-content: center;
 }
 .services__wrapper {
   width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 22px;
   margin-bottom: 72px;
 }
+/* Os cards encolhem um pouco (até ~187px) entre 1201 e 1360px para
+   respeitar as margens laterais; acima disso voltam aos 219px. */
 .services__card {
-  width: 219px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 219px;
   height: 222px;
   padding: 0 20px;
   align-items: center;
@@ -247,7 +288,7 @@ html {
 }
 .services__card__text {
   font-size: var(--card-font-size);
-  width: 163px;
+  max-width: 163px;
 }
 .local,
 .local__wrapper {
@@ -255,26 +296,31 @@ html {
   display: flex;
 }
 .local {
-  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 88px;
+  padding: var(--section-padding) var(--gutter);
 }
 .local__wrapper {
   justify-content: center;
   gap: 32px;
 }
 .local__card {
-  width: 37%;
-  height: auto;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
-  align-items: start;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
-  padding: 56px 48px;
+  padding: 40px 32px;
   border: solid 1px var(--green);
   border-radius: 16px;
+}
+/* Botões alinhados na mesma linha em todos os cards, independentemente do
+   tamanho do endereço. */
+.local__card .btn {
+  margin-top: auto;
+  align-self: flex-start;
 }
 .card__title {
   font-size: var(--p-font-size);
@@ -286,8 +332,11 @@ html {
   margin-bottom: 40px;
 }
 /* Telefone é link tel: (discagem em 1 toque no celular), mas mantém a
-   aparência do texto do cartão. */
+   aparência do texto do cartão. O padding vertical garante área de toque
+   mínima de 24px. */
 .local__card__phone {
+  display: inline-block;
+  padding: 6px 0;
   color: inherit;
   text-decoration: none;
 }
@@ -297,16 +346,19 @@ html {
 }
 .footer__data {
   width: 100%;
-  height: 384px;
+  min-height: 384px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 0 88px;
+  gap: 32px 64px;
+  padding: 64px var(--gutter);
   background: var(--offwhite);
 }
 .footer__logo {
   width: 435px;
-  height: 112px;
+  max-width: 100%;
+  height: auto;
 }
 .footer__info {
   display: flex;
@@ -320,6 +372,7 @@ html {
 }
 .footer__text {
   width: 400px;
+  max-width: 100%;
 }
 .footer__phone {
   display: flex;
@@ -328,49 +381,60 @@ html {
 }
 .footer__rights {
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 8px 16px;
+  padding: 8px 0;
   background: var(--green);
 }
 .footer__rights p {
   padding: 0 33px;
 }
+.footer__rights a {
+  color: var(--black);
+}
 .btn {
+  display: inline-block;
   font-weight: var(--font-medium);
   padding: 14px 30px;
   background-color: var(--green);
   border-radius: 30px;
   border: solid 1px var(--green);
   margin-right: 8px;
+  transition: background-color 0.2s, border-color 0.2s;
 }
+/* O CTA principal escurece no hover em vez de "apagar" (antes ficava
+   vazado, idêntico ao botão secundário). */
 .btn:hover {
-  background: 0 0;
-  border: solid 1px var(--green);
-  transition: 0.2s;
+  background-color: var(--green-hover);
+  border-color: var(--green-hover);
 }
 .btn--transparent {
   background: 0 0;
   border: solid 1px var(--black);
 }
+.btn--transparent:hover {
+  background-color: var(--acqua-green);
+  border-color: var(--black);
+}
 @media screen and (max-width: 576px) {
   :root {
-    --h1-font-size: 1.5rem;
-    --h2-font-size: 1rem;
-    --p-font-size: 0.75rem;
+    --h1-font-size: 1.75rem;
+    --h2-font-size: 1.25rem;
+    /* Público de memória/Alzheimer: texto corrido não desce de 15px e o
+       texto pequeno (botões, endereços) não desce de 12px. */
+    --p-font-size: 0.9375rem;
     --card-font-size: 0.87rem;
-    --small-font-size: 0.625rem;
+    --small-font-size: 0.75rem;
   }
   .line__title {
     margin-bottom: 36px;
   }
-  .about__info:nth-child(3) {
+  .about__info {
     margin-bottom: 40px;
-  }
-  .services {
-    height: 1536px;
-    padding: 30px;
   }
   .footer__logo {
     width: 240px;
@@ -379,70 +443,38 @@ html {
 @media screen and (max-width: 768px) {
   .nav {
     padding: 0 30px;
-    position: fixed;
-    z-index: 100;
-  }
-  .home__img,
-  .nav__list {
-    display: none;
   }
   .logo__img {
     width: 126px;
     height: 32px;
   }
-  .mb__menu__icon,
-  .open {
-    display: block;
-  }
-  .home {
-    padding: 30px;
-    height: 551px;
-  }
-  .about,
-  .footer__data {
-    padding: 0 30px;
-  }
-  .about {
-    height: 100%;
-  }
   .btn {
-    font-size: var(--small-font-size);
-    font-weight: var(--font-medium);
-    text-decoration: none;
-    color: var(--black);
     padding: 12px 26px;
-    background-color: var(--green);
-    border-radius: 30px;
-    border: solid 1px var(--green);
-    margin-right: 8px;
-  }
-  .btn--transparent {
-    background: 0 0;
-    border: solid 1px var(--black);
-  }
-  :root {
-    --h1-font-size: 2rem;
   }
 }
 @media screen and (max-width: 992px) {
   .home__img {
     display: none;
   }
-
-  .about__img {
-    width: 300px;
-    margin-bottom: 30px;
-    margin-right: 0;
+  /* Sem a ilustração, o herói tem a altura do conteúdo (não 100vh vazio). */
+  .home {
+    height: auto;
+    padding: calc(var(--nav-height) + 80px) 30px 80px;
   }
   .about {
-    height: 100%;
-    padding: 56px 30px;
-    display: flex;
+    padding: 80px 30px;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 30px;
+  }
+  .about > picture {
+    flex: 0 0 auto;
+  }
+  .about__img {
+    width: 300px;
   }
   .about__data {
-    width: 100%;
+    flex: 0 0 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -455,42 +487,53 @@ html {
     width: 100%;
   }
   .footer__data {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .footer__logo {
-    margin-left: 100px;
-  }
-  .footer__info {
-    text-align: center;
-    align-items: center;
-  }
-  .footer__text {
-    width: 240px;
+    padding: 64px 30px;
   }
 }
 @media screen and (max-width: 1200px) {
+  /* A lista de 6 links (~760px) + logo não cabe entre 769 e 1200px:
+     abaixo disso o menu vira o botão + painel móvel. */
+  .nav__list {
+    display: none;
+  }
+  .mb__menu__icon,
+  .open {
+    display: block;
+  }
   .services__wrapper {
-    justify-content: center;
     flex-wrap: wrap;
+  }
+  .services__card {
+    flex: 0 0 219px;
   }
   .local,
   .services {
-    height: 100%;
-    padding: 56px 30px;
+    padding: 80px 30px;
   }
   .local__wrapper {
     align-items: center;
     flex-direction: column;
   }
   .local__card {
+    flex: 0 0 auto;
     width: 100%;
-    height: auto;
   }
   .local__card__text {
     margin-bottom: 22px;
   }
-  .footer__logo {
-    margin-right: 100px;
+  .footer__data {
+    justify-content: center;
+  }
+  .footer__info {
+    text-align: center;
+    align-items: center;
+  }
+  .footer__text {
+    width: auto;
+    max-width: 400px;
+  }
+  .footer__rights {
+    justify-content: center;
+    text-align: center;
   }
 }
