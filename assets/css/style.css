@@ -160,9 +160,15 @@ html {
   flex-direction: column;
   display: flex;
 }
+/* A foto declara width/height no HTML (evita layout shift). Como o CSS
+   sobrescreve só a largura, a altura precisa voltar a "auto" para a
+   proporção original ser mantida — sem isso a imagem fica esticada. */
 .about__img {
+  display: block;
   margin-right: 88px;
   width: 450px;
+  max-width: 100%;
+  height: auto;
   border-radius: 15px;
 }
 .about__data {
