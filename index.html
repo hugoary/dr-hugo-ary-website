@@ -9,7 +9,7 @@
     />
     <meta name="author" content="Dr. Hugo Ary Oliveira Silva" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <meta name="theme-color" content="#2d7db0" />
+    <meta name="theme-color" content="#54c791" />
     <link rel="canonical" href="https://drhugoary.com.br/" />
 
     <!-- Open Graph: define o cartão exibido ao compartilhar o link
@@ -94,13 +94,19 @@
         </div>
 
         <div class="mb__menu__icon">
-          <button onclick="menuShow()" class="mb__menu__btn" aria-label="Abrir menu de navegação">
+          <button
+            onclick="menuShow()"
+            class="mb__menu__btn"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+            aria-controls="mb-menu"
+          >
             <img src="./assets/img/bar-icon.svg" alt="" class="icon" />
           </button>
         </div>
       </nav>
 
-      <div class="mb__menu">
+      <div class="mb__menu" id="mb-menu">
         <ul class="nav__list">
           <li onclick="chooseSection()" class="nav__item">
             <a href="#home" class="nav__link">HOME</a>
@@ -136,8 +142,9 @@
       <section class="home" id="home">
         <div class="home__data">
           <h1 class="home__title">
-            DR. HUGO ARY OLIVEIRA SILVA <br />
-            NEUROLOGISTA
+            DR. HUGO ARY <br />
+            OLIVEIRA SILVA
+            <span class="home__title__role">NEUROLOGISTA</span>
           </h1>
           <p class="home__subtitle">CRM-DF 19610 / RQE 17996</p>
           <p class="home__info">
