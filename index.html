@@ -9,7 +9,7 @@
     />
     <meta name="author" content="Dr. Hugo Ary Oliveira Silva" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <meta name="theme-color" content="#54c791" />
+    <meta name="theme-color" content="#07110d" />
     <link rel="canonical" href="https://drhugoary.com.br/" />
 
     <!-- Open Graph: define o cartão exibido ao compartilhar o link
@@ -37,365 +37,447 @@
 
     <title>Neurologista em Brasília | Dr. Hugo Ary Oliveira Silva</title>
 
+    <!-- Marca o documento como "com JS" antes da primeira pintura: os estados
+         iniciais das revelações no scroll só se aplicam quando o script vai
+         rodar. Sem JS, todo o conteúdo aparece normalmente. -->
+    <script>document.documentElement.classList.add("js");</script>
+
     <!-- Fontes: preconnect + link direto (em vez de @import no CSS) encurta a
          cadeia de requisições antes da primeira pintura. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Poppins:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&family=Manrope:wght@400;500;600&display=swap"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="icon" href="./assets/img/brain-vector.svg" />
     <link rel="apple-touch-icon" href="./assets/img/brain-vector.svg" />
   </head>
   <body>
-    <header class="l-header">
-      <nav class="nav">
-        <div>
-          <a href="#home" class="nav__logo">
-            <img
-              src="./assets/img/logo.svg"
-              alt="Dr. Hugo Ary Oliveira Silva - Neurologista em Brasília"
-              class="logo__img"
-            />
-          </a>
-        </div>
+    <a class="skip-link" href="#sobre">Pular para o conteúdo</a>
 
-        <div class="nav__menu" id="nav-menu">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <a href="#home" class="nav__link">HOME</a>
-              <span class="nav__line"></span>
-            </li>
-            <li class="nav__item">
-              <a href="#sobre" class="nav__link">SOBRE</a>
-              <span class="nav__line"></span>
-            </li>
-            <li class="nav__item">
-              <a href="#especialidades" class="nav__link">ESPECIALIDADES</a>
-              <span class="nav__line"></span>
-            </li>
-            <li class="nav__item">
-              <a href="#clinicas" class="nav__link">CLÍNICAS</a>
-              <span class="nav__line"></span>
-            </li>
-            <li class="nav__item">
-              <a href="./avaliacao-neurocognitiva.html" class="nav__link">AVALIAÇÃO NEUROCOGNITIVA</a>
-              <span class="nav__line"></span>
-            </li>
-            <li class="nav__item">
-              <a href="./tap-test.html" class="nav__link">
-                <svg class="svg-icon svg-icon--nav" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5c-3.6 5-7 8.6-7 12.5a7 7 0 0 0 14 0c0-3.9-3.4-7.5-7-12.5z"/></svg>TAP TEST
-              </a>
-              <span class="nav__line"></span>
-            </li>
-          </ul>
-        </div>
+    <header class="site-header" data-theme="dark">
+      <nav class="nav" aria-label="Principal">
+        <a href="#home" class="nav__logo" aria-label="Dr. Hugo Ary Oliveira Silva — início">
+          <img
+            src="./assets/img/logo-light.svg"
+            alt=""
+            class="nav__logo-img nav__logo-img--light"
+            width="152"
+            height="36"
+          />
+          <img
+            src="./assets/img/logo.svg"
+            alt=""
+            class="nav__logo-img nav__logo-img--dark"
+            width="152"
+            height="36"
+          />
+        </a>
 
-        <div class="mb__menu__icon">
-          <button
-            onclick="menuShow()"
-            class="mb__menu__btn"
-            aria-label="Abrir menu de navegação"
-            aria-expanded="false"
-            aria-controls="mb-menu"
-          >
-            <img src="./assets/img/bar-icon.svg" alt="" class="icon" />
-          </button>
-        </div>
+        <ul class="nav__list">
+          <li><a href="#sobre" class="nav__link">Sobre</a></li>
+          <li><a href="#especialidades" class="nav__link">Especialidades</a></li>
+          <li><a href="#clinicas" class="nav__link">Clínicas</a></li>
+          <li><a href="./avaliacao-neurocognitiva.html" class="nav__link">Avaliação neurocognitiva</a></li>
+          <li><a href="./tap-test.html" class="nav__link">TAP Test</a></li>
+        </ul>
+
+        <a href="https://wa.me/556139991126" class="btn btn--sm nav__cta" target="_blank" rel="noopener">Agendar</a>
+
+        <button
+          class="nav__toggle"
+          type="button"
+          aria-label="Abrir menu de navegação"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </button>
       </nav>
 
-      <div class="mb__menu" id="mb-menu">
-        <ul class="nav__list">
-          <li onclick="chooseSection()" class="nav__item">
-            <a href="#home" class="nav__link">HOME</a>
-            <span class="nav__line"></span>
-          </li>
-          <li onclick="chooseSection()" class="nav__item">
-            <a href="#sobre" class="nav__link">SOBRE</a>
-            <span class="nav__line"></span>
-          </li>
-          <li onclick="chooseSection()" class="nav__item">
-            <a href="#especialidades" class="nav__link">ESPECIALIDADES</a>
-            <span class="nav__line"></span>
-          </li>
-          <li onclick="chooseSection()" class="nav__item">
-            <a href="#clinicas" class="nav__link">CLÍNICAS</a>
-            <span class="nav__line"></span>
-          </li>
-          <li onclick="chooseSection()" class="nav__item">
-            <a href="./avaliacao-neurocognitiva.html" class="nav__link">AVALIAÇÃO NEUROCOGNITIVA</a>
-            <span class="nav__line"></span>
-          </li>
-          <li onclick="chooseSection()" class="nav__item">
-            <a href="./tap-test.html" class="nav__link">
-              <svg class="svg-icon svg-icon--nav" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5c-3.6 5-7 8.6-7 12.5a7 7 0 0 0 14 0c0-3.9-3.4-7.5-7-12.5z"/></svg>TAP TEST
-            </a>
-            <span class="nav__line"></span>
-          </li>
+      <div class="mobile-menu" id="mobile-menu" hidden>
+        <ul class="mobile-menu__list">
+          <li><a href="#sobre" class="mobile-menu__link">Sobre</a></li>
+          <li><a href="#especialidades" class="mobile-menu__link">Especialidades</a></li>
+          <li><a href="#clinicas" class="mobile-menu__link">Clínicas</a></li>
+          <li><a href="./avaliacao-neurocognitiva.html" class="mobile-menu__link">Avaliação neurocognitiva</a></li>
+          <li><a href="./tap-test.html" class="mobile-menu__link">TAP Test</a></li>
         </ul>
+        <a href="https://wa.me/556139991126" class="btn mobile-menu__cta" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
       </div>
     </header>
 
-    <main class="l-main">
-      <section class="home" id="home">
-        <div class="home__data">
-          <h1 class="home__title">
-            DR. HUGO ARY <br />
-            OLIVEIRA SILVA
-            <span class="home__title__role">NEUROLOGISTA</span>
-          </h1>
-          <p class="home__subtitle">CRM-DF 19610 / RQE 17996</p>
-          <p class="home__info">
-            Neurologista <br />
-            Especialista em Cognição e Comportamento
+    <main>
+      <!-- HERO ─────────────────────────────────────────────────────────── -->
+      <section class="hero" id="home" data-nav-theme="dark">
+        <!-- Rede neural desenhada em canvas (assets/js/script.js): neurônios
+             distribuídos na silhueta de um cérebro, com potenciais de ação
+             percorrendo as sinapses. É decorativa: leitores de tela a
+             ignoram. -->
+        <canvas class="hero__canvas" aria-hidden="true"></canvas>
+        <div class="hero__scrim" aria-hidden="true"></div>
+
+        <div class="hero__inner">
+          <p class="eyebrow hero__eyebrow">
+            <span class="eyebrow__dot" aria-hidden="true"></span>
+            Neurologia · Cognição e Comportamento · Brasília
           </p>
-          <a
-            href="https://wa.me/556139991126"
-            class="btn"
-            target="_blank"
-            >FALE AGORA</a
-          >
-          <a href="#sobre" class="btn btn--transparent"> SAIBA MAIS </a>
+
+          <h1 class="hero__title">
+            <span class="hero__line"><span class="hero__line-inner">Dr. Hugo Ary</span></span>
+            <span class="hero__line"><span class="hero__line-inner"><em>Oliveira Silva</em></span></span>
+            <span class="hero__role">Neurologista</span>
+          </h1>
+
+          <p class="hero__lede">
+            Especialista em Cognição e Comportamento. Avaliação e acompanhamento
+            de queixas de memória, atenção, aprendizagem e comportamento.
+          </p>
+
+          <div class="hero__actions">
+            <a href="https://wa.me/556139991126" class="btn" target="_blank" rel="noopener">
+              <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.9 7.2c-.2 0-.5 0-.8.3-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.5 2.6 1 3.1.8 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.6-.3-2-1c-.3-.1-.5-.2-.7.2l-.9 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5L9.8 7.6c-.2-.5-.5-.4-.7-.4h-.2z"/></svg>
+              Agendar consulta
+            </a>
+            <a href="#sobre" class="btn btn--ghost">Conheça o trabalho</a>
+          </div>
+
+          <p class="hero__crm">CRM-DF 19610 <span aria-hidden="true">·</span> RQE 17996</p>
         </div>
-        <!-- Maior elemento visível no desktop (LCP): WebP com PNG de reserva,
-             dimensões declaradas (evita layout shift) e prioridade alta. -->
-        <picture>
-          <source srcset="./assets/img/brain-image.webp" type="image/webp" />
-          <img
-            src="./assets/img/brain-image.png"
-            alt="Ilustração de um cérebro humano"
-            class="home__img"
-            width="456"
-            height="480"
-            fetchpriority="high"
-            decoding="async"
-          />
-        </picture>
+
+        <p class="hero__caption" aria-hidden="true">
+          <span>Fig. 01</span> Rede neural em atividade espontânea<span class="hero__caption-hint"> — mova o cursor para direcionar a atenção</span>
+        </p>
       </section>
 
-      <section class="about" id="sobre">
-        <picture>
-          <source srcset="./assets/img/hugo.webp" type="image/webp" />
-          <img
-            src="./assets/img/hugo.jpg"
-            alt="Dr. Hugo Ary Oliveira Silva, neurologista em Brasília"
-            class="about__img"
-            width="918"
-            height="1064"
-            loading="lazy"
-            decoding="async"
-          />
-        </picture>
-        <div class="about__data">
-          <h2 class="about__title">SOBRE</h2>
-          <span class="line__title"></span>
+      <!-- SOBRE ────────────────────────────────────────────────────────── -->
+      <section class="about" id="sobre" data-nav-theme="light">
+        <div class="container about__grid">
+          <figure class="about__figure" data-reveal="image">
+            <picture>
+              <source srcset="./assets/img/hugo.webp" type="image/webp" />
+              <img
+                src="./assets/img/hugo.jpg"
+                alt="Dr. Hugo Ary Oliveira Silva, neurologista em Brasília"
+                class="about__img"
+                width="918"
+                height="1064"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <figcaption class="about__caption">
+              Dr. Hugo Ary Oliveira Silva <span>CRM-DF 19610 · RQE 17996</span>
+            </figcaption>
+          </figure>
 
-          <ul class="about__info">
-            <li class="about__item">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="about__icon"
-              />
-              Médico formado pela Universidade Católica de Brasília (UCB).
+          <div class="about__content">
+            <p class="section-label" data-reveal><span>01</span> Sobre</p>
+            <h2 class="section-title" data-reveal style="--d: 80ms">
+              Uma formação dedicada ao cérebro que <em>lembra, aprende e sente.</em>
+            </h2>
+
+            <!-- Trajetória como um axônio: o sinal desce pela linha e cada
+                 etapa acende no momento em que ele chega. -->
+            <ol class="axon" data-reveal="axon">
+              <li class="axon__track" aria-hidden="true"><span class="axon__signal"></span></li>
+              <li class="axon__item" style="--d: 180ms">
+                <span class="axon__node" aria-hidden="true"></span>
+                <span class="axon__label">Graduação</span>
+                Médico formado pela Universidade Católica de Brasília (UCB).
+              </li>
+              <li class="axon__item" style="--d: 480ms">
+                <span class="axon__node" aria-hidden="true"></span>
+                <span class="axon__label">Residência</span>
+                Neurologista pelo Hospital de Base do Distrito Federal.
+              </li>
+              <li class="axon__item" style="--d: 780ms">
+                <span class="axon__node" aria-hidden="true"></span>
+                <span class="axon__label">Especialização</span>
+                Especialista em Cognição e Comportamento pela Universidade Federal
+                de São Paulo (UNIFESP).
+              </li>
+              <li class="axon__item" style="--d: 1080ms">
+                <span class="axon__node" aria-hidden="true"></span>
+                <span class="axon__label">Pós-graduação</span>
+                Pós-graduado em Transtornos do Neurodesenvolvimento.
+              </li>
+            </ol>
+
+            <a href="https://wa.me/556139991126" class="btn btn--dark" target="_blank" rel="noopener" data-reveal style="--d: 120ms">
+              Fale com o consultório
+              <svg class="svg-icon btn__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- COGNIÇÃO (manifesto) ─────────────────────────────────────────── -->
+      <!-- As palavras "acendem" conforme a leitura avança, como uma memória
+           sendo codificada. O texto completo está no HTML (SEO e leitores de
+           tela); o JS só envolve cada palavra num <span>. -->
+      <section class="manifesto" data-nav-theme="dark" aria-label="Cognição">
+        <div class="container">
+          <p class="section-label section-label--light"><span>—</span> Cognição</p>
+          <p class="manifesto__text" data-words>
+            Cognição é o modo como <em>lembramos</em>, prestamos <em>atenção</em>,
+            <em>aprendemos</em> e nos relacionamos com o mundo. Cuidar dela pede
+            escuta, tempo e método.
+          </p>
+        </div>
+      </section>
+
+      <!-- ESPECIALIDADES ───────────────────────────────────────────────── -->
+      <section class="services" id="especialidades" data-nav-theme="light">
+        <div class="container">
+          <div class="section-head">
+            <p class="section-label" data-reveal><span>02</span> Especialidades</p>
+            <h2 class="section-title" data-reveal style="--d: 80ms">
+              Áreas de <em>atuação</em>
+            </h2>
+          </div>
+
+          <ul class="services__grid" data-reveal="group">
+            <li class="card" style="--d: 0ms">
+              <span class="card__index">01</span>
+              <!-- Memória: o traço (engrama) se forma, ligando os pontos. -->
+              <svg class="card__icon icon-memory" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <path class="icon-memory__trace" pathLength="1" d="M9 31 19 14l13 8 6 15-16 2z" />
+                <circle cx="9" cy="31" r="2.2" /><circle cx="19" cy="14" r="2.2" /><circle cx="32" cy="22" r="2.2" /><circle cx="38" cy="37" r="2.2" /><circle cx="22" cy="39" r="2.2" />
+              </svg>
+              <h3 class="card__title">Problemas de memória</h3>
+              <p class="card__text">Investigação de esquecimentos e queixas cognitivas, com diagnóstico diferencial cuidadoso.</p>
             </li>
-            <li class="about__item">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="about__icon"
-              />
-              Neurologista pelo Hospital de Base do Distrito Federal.
+            <li class="card" style="--d: 70ms">
+              <span class="card__index">02</span>
+              <!-- Atenção: o foco se fecha sobre o centro e o entorno esmaece. -->
+              <svg class="card__icon icon-focus" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <g class="icon-focus__noise">
+                  <circle cx="8" cy="10" r="1.4" /><circle cx="40" cy="9" r="1.4" /><circle cx="6" cy="34" r="1.4" /><circle cx="41" cy="38" r="1.4" /><circle cx="24" cy="5" r="1.4" /><circle cx="25" cy="44" r="1.4" />
+                </g>
+                <circle class="icon-focus__ring" cx="24" cy="24" r="11" />
+                <circle class="icon-focus__core" cx="24" cy="24" r="3" />
+              </svg>
+              <h3 class="card__title">TDAH</h3>
+              <p class="card__text">Avaliação do déficit de atenção e hiperatividade em adultos, com plano de tratamento individual.</p>
             </li>
-            <li class="about__item">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="about__icon"
-              />
-              Especialista em Cognição e Comportamento pela Universidade Federal
-              de São Paulo (UNIFESP).
+            <li class="card" style="--d: 130ms">
+              <span class="card__index">03</span>
+              <!-- Neurônio: um potencial de ação percorre o axônio. -->
+              <svg class="card__icon icon-neuron" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <path d="M8 12l6 6M6 22h8M10 31l5-5" />
+                <circle cx="17" cy="22" r="5" />
+                <path class="icon-neuron__axon" d="M22 22h19" />
+                <path class="icon-neuron__spike" pathLength="1" d="M22 22h19" />
+                <path d="M41 22l3-4M41 22l3 4" />
+              </svg>
+              <h3 class="card__title">Doença de Alzheimer e outros transtornos</h3>
+              <p class="card__text">Diagnóstico e acompanhamento das demências e de outras doenças neurodegenerativas.</p>
             </li>
-            <li class="about__item">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="about__icon"
-              />
-              Pós-graduado em Transtornos do Neurodesenvolvimento.
+            <li class="card" style="--d: 180ms">
+              <span class="card__index">04</span>
+              <!-- Espectro: frequências diferentes convivendo lado a lado. -->
+              <svg class="card__icon icon-spectrum" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <defs><clipPath id="spectrum-clip"><rect x="4" y="6" width="40" height="36" rx="2" /></clipPath></defs>
+                <g clip-path="url(#spectrum-clip)">
+                  <path class="icon-spectrum__wave icon-spectrum__wave--a" d="M-12 14q4-5 8 0t8 0 8 0 8 0 8 0 8 0 8 0 8 0 8 0 8 0" />
+                  <path class="icon-spectrum__wave icon-spectrum__wave--b" d="M-12 24q4 6 8 0t8 0 8 0 8 0 8 0 8 0 8 0 8 0" />
+                  <path class="icon-spectrum__wave icon-spectrum__wave--c" d="M-12 34q4-3 8 0t8 0 8 0 8 0 8 0 8 0 8 0 8 0 8 0 8 0" />
+                </g>
+              </svg>
+              <h3 class="card__title">Transtorno do Espectro Autista adulto</h3>
+              <p class="card__text">Avaliação diagnóstica de TEA na vida adulta e orientação para o dia a dia.</p>
+            </li>
+            <li class="card" style="--d: 220ms">
+              <span class="card__index">05</span>
+              <!-- Sinapse: neurotransmissores atravessam a fenda — plasticidade. -->
+              <svg class="card__icon icon-synapse" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <path d="M4 10c10 0 14 6 14 14s-4 14-14 14" />
+                <path class="icon-synapse__post" d="M44 10c-10 0-14 6-14 14s4 14 14 14" />
+                <g class="icon-synapse__vesicles">
+                  <circle cx="20" cy="18" r="1.6" /><circle cx="20.5" cy="24" r="1.6" /><circle cx="20" cy="30" r="1.6" />
+                </g>
+              </svg>
+              <h3 class="card__title">Dificuldade de aprendizado</h3>
+              <p class="card__text">Investigação neurológica das dificuldades escolares e de aprendizagem.</p>
+            </li>
+            <li class="card card--tools" style="--d: 260ms">
+              <span class="card__index">+</span>
+              <h3 class="card__title">Ferramentas clínicas</h3>
+              <p class="card__text">Instrumentos usados em consulta, disponíveis on-line.</p>
+              <div class="card__links">
+                <a href="./avaliacao-neurocognitiva.html" class="text-link">Avaliação neurocognitiva <span aria-hidden="true">→</span></a>
+                <a href="./tap-test.html" class="text-link">TAP Test (HPN) <span aria-hidden="true">→</span></a>
+              </div>
             </li>
           </ul>
-
-          <a href="https://wa.me/556139991126" class="btn" target="_blank">
-            FALE AGORA
-          </a>
         </div>
       </section>
 
-      <section class="services" id="especialidades">
-        <div class="services__data">
-          <h2 class="services__title">ESPECIALIDADES</h2>
-          <span class="line__title"></span>
-          <div class="services__wrapper">
-            <div class="services__card">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="services__card__icon"
-              />
-              <p class="services__card__text">Problemas de memória</p>
-            </div>
-            <div class="services__card">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="services__card__icon"
-              />
-              <p class="services__card__text">TDAH</p>
-            </div>
-            <div class="services__card">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="services__card__icon"
-              />
-              <p class="services__card__text">
-                Doença de Alzheimer e Outros Transtornos
-              </p>
-            </div>
-            <div class="services__card">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="services__card__icon"
-              />
-              <p class="services__card__text">
-                Transtorno do Espectro Autista Adulto
-              </p>
-            </div>
-            <div class="services__card">
-              <img
-                src="./assets/img/brain-vector.svg"
-                alt=""
-                class="services__card__icon"
-              />
-              <p class="services__card__text">Dificuldade de Aprendizado</p>
-            </div>
+      <!-- CLÍNICAS ─────────────────────────────────────────────────────── -->
+      <section class="local" id="clinicas" data-nav-theme="light">
+        <div class="container">
+          <div class="section-head">
+            <p class="section-label" data-reveal><span>03</span> Clínicas</p>
+            <h2 class="section-title" data-reveal style="--d: 80ms">
+              Onde <em>atendo</em> em Brasília
+            </h2>
           </div>
 
-          <a
-            href="https://wa.me/556139991126"
-            class="btn"
-            target="_blank"
-            >FALE AGORA</a
-          >
+          <ul class="local__list" data-reveal="group">
+            <li class="place" style="--d: 0ms">
+              <span class="place__index">01</span>
+              <div class="place__body">
+                <h3 class="place__name">Centro de Aneurisma Cerebral</h3>
+                <p class="place__address">SGAS II St de grandes áreas sul 616 - Ed Linea Vita - bloco A salas 201 202 e 204.</p>
+              </div>
+              <a href="tel:+5561998271090" class="place__phone">
+                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg>
+                (61) 99827-1090
+              </a>
+              <a
+                href="https://www.google.com/maps/place/Centro+de+Aneurisma+Cerebral/@-15.8399834,-47.9204441,15z/data=!4m2!3m1!1s0x0:0xaaf18d0923b8e174?sa=X&ved=2ahUKEwj5wNryz6eAAxVCK7kGHf7tD1wQ_BJ6BAhDEAA&ved=2ahUKEwj5wNryz6eAAxVCK7kGHf7tD1wQ_BJ6BAhLEAg"
+                class="place__map"
+                target="_blank"
+                rel="noopener"
+                >Ver no mapa <span aria-hidden="true">↗</span></a
+              >
+            </li>
+
+            <li class="place" style="--d: 70ms">
+              <span class="place__index">02</span>
+              <div class="place__body">
+                <h3 class="place__name">Centro Médico Santa Luzia</h3>
+                <p class="place__address">Edifício OHB SHLS 716 Conjunto A Bloco B - Asa sul.</p>
+              </div>
+              <a href="tel:+5561991225014" class="place__phone">
+                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg>
+                (61) 99122-5014
+              </a>
+              <a
+                href="https://www.google.com/maps/place/Centro+M%C3%A9dico+Santa+Luzia:+Consultas,+Centro+M%C3%A9dico,+Multicl%C3%ADnica,+Cl%C3%ADnica+M%C3%A9dica,+Bras%C3%ADlia+DF/@-15.8258699,-47.9287773,15z/data=!4m6!3m5!1s0x935a31cbc9e81fdb:0x6384e252cd146530!8m2!3d-15.8258699!4d-47.9287773!16s%2Fg%2F11g0j6tjkg?entry=ttu"
+                class="place__map"
+                target="_blank"
+                rel="noopener"
+                >Ver no mapa <span aria-hidden="true">↗</span></a
+              >
+            </li>
+
+            <li class="place" style="--d: 130ms">
+              <span class="place__index">03</span>
+              <div class="place__body">
+                <h3 class="place__name">Hospital DF Star</h3>
+                <p class="place__address">SGAS 914 Conjunto B Lote 68A - Asa Sul.</p>
+              </div>
+              <a href="tel:+5561999291934" class="place__phone">
+                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg>
+                (61) 99929-1934
+              </a>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Hospital+DF+Star+Brasilia"
+                class="place__map"
+                target="_blank"
+                rel="noopener"
+                >Ver no mapa <span aria-hidden="true">↗</span></a
+              >
+            </li>
+
+            <li class="place" style="--d: 180ms">
+              <span class="place__index">04</span>
+              <div class="place__body">
+                <h3 class="place__name">Clínica Neurostart</h3>
+                <p class="place__address">SGAS 915 - Centro Clínico Advance 1.</p>
+              </div>
+              <a href="tel:+556139991126" class="place__phone">
+                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg>
+                (61) 3999-1126
+              </a>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Neurostart+Brasilia"
+                class="place__map"
+                target="_blank"
+                rel="noopener"
+                >Ver no mapa <span aria-hidden="true">↗</span></a
+              >
+            </li>
+          </ul>
         </div>
       </section>
 
-      <section class="local" id="clinicas">
-        <h2 class="local__title">LOCALIDADES</h2>
-        <span class="line__title"></span>
-        <div class="local__wrapper">
-          
-          <div class="local__card">
-            <p class="card__title">Centro de Aneurisma Cerebral</p>
-            <p class="local__card__text">
-              SGAS II St de grandes áreas sul 616 - Ed Linea Vita - bloco A
-              salas 201 202 e 204.
-            </p>
-            <p class="local__card__text">
-                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg> <a href="tel:+5561998271090" class="local__card__phone">(61) 99827-1090</a>
-            </p>
-            <a
-              href="https://www.google.com/maps/place/Centro+de+Aneurisma+Cerebral/@-15.8399834,-47.9204441,15z/data=!4m2!3m1!1s0x0:0xaaf18d0923b8e174?sa=X&ved=2ahUKEwj5wNryz6eAAxVCK7kGHf7tD1wQ_BJ6BAhDEAA&ved=2ahUKEwj5wNryz6eAAxVCK7kGHf7tD1wQ_BJ6BAhLEAg"
-              class="btn"
-              target="_blank"
-              >LOCALIZAÇÃO</a
-            >
+      <!-- CONTATO ──────────────────────────────────────────────────────── -->
+      <section class="contact" data-nav-theme="dark" aria-labelledby="contact-title">
+        <!-- Ritmo de EEG em movimento contínuo (linear: é um traçado, não uma
+             transição). Pausa fora da tela. -->
+        <svg class="contact__eeg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path class="contact__eeg-path" d="M0 66.5 L6 73.3 L12 73.5 L18 70.5 L24 68.9 L30 67.1 L36 61.3 L42 53.2 L48 50.0 L54 54.8 L60 62.0 L66 65.1 L72 64.4 L78 63.8 L84 62.9 L90 57.2 L96 46.8 L102 39.2 L108 40.9 L114 49.6 L120 58.0 L126 63.4 L132 68.2 L138 72.6 L144 71.7 L150 63.0 L156 52.4 L162 48.7 L168 53.4 L174 60.4 L180 65.7 L186 70.7 L192 76.9 L198 79.7 L204 73.8 L210 61.9 L216 52.8 L222 51.0 L228 52.7 L234 53.4 L240 54.7 L246 59.7 L252 65.6 L258 65.8 L264 58.7 L270 51.0 L276 48.5 L282 49.7 L288 49.8 L294 49.9 L300 54.5 L306 63.6 L312 70.2 L318 69.4 L324 64.5 L330 61.6 L336 61.3 L342 59.6 L348 56.4 L354 57.3 L360 63.4 L366 62.5 L372 55.0 L378 60.9 L384 65.3 L390 62.5 L396 56.4 L402 47.9 L408 43.0 L414 47.3 L420 57.7 L426 65.6 L432 66.6 L438 64.3 L444 61.7 L450 57.1 L456 48.3 L462 40.4 L468 40.9 L474 50.7 L480 62.1 L486 68.5 L492 71.1 L498 73.2 L504 73.2 L510 67.4 L516 57.8 L522 52.4 L528 55.6 L534 62.6 L540 66.9 L546 68.0 L552 69.9 L558 72.0 L564 69.3 L570 60.2 L576 51.1 L582 48.4 L588 51.1 L594 53.3 L600 53.5 L606 55.8 L612 61.3 L618 64.5 L624 60.6 L630 52.9 L636 48.6 L642 50.0 L648 52.5 L654 54.1 L660 58.0 L666 66.9 L672 75.9 L678 77.2 L684 70.6 L690 62.8 L696 58.9 L702 57.0 L708 54.6 L714 54.9 L720 62.0 L726 72.6 L732 78.0 L738 73.8 L744 64.7 L750 57.0 L756 51.2 L762 44.9 L768 40.4 L774 43.6 L780 54.3 L786 64.7 L792 67.5 L798 64.1 L804 60.5 L810 58.1 L816 53.7 L822 48.0 L828 47.1 L834 54.5 L840 65.3 L846 71.5 L852 71.8 L858 71.0 L864 71.3 L870 69.0 L876 62.0 L882 55.3 L888 55.3 L894 61.0 L900 65.5 L906 65.5 L912 64.6 L918 65.6 L924 65.0 L930 58.4 L936 48.7 L942 43.6 L948 46.2 L954 51.3 L960 52.9 L966 46.0 L972 41.3 L978 56.5 L984 64.6 L990 57.3 L996 49.3 L1002 48.2 L1008 52.5 L1014 57.3 L1020 62.3 L1026 70.4 L1032 79.6 L1038 82.2 L1044 74.7 L1050 62.9 L1056 55.2 L1062 53.2 L1068 52.9 L1074 53.3 L1080 57.9 L1086 66.9 L1092 73.4 L1098 70.7 L1104 61.1 L1110 52.6 L1116 48.8 L1122 46.6 L1128 44.2 L1134 45.3 L1140 53.1 L1146 63.1 L1152 67.5 L1158 64.8 L1164 60.8 L1170 59.8 L1176 59.4 L1182 56.5 L1188 54.0 L1194 57.6 L1200 66.5 L1206 73.3 L1212 73.5 L1218 70.5 L1224 68.9 L1230 67.1 L1236 61.3 L1242 53.2 L1248 50.0 L1254 54.8 L1260 62.0 L1266 65.1 L1272 64.4 L1278 63.8 L1284 62.9 L1290 57.2 L1296 46.8 L1302 39.2 L1308 40.9 L1314 49.6 L1320 58.0 L1326 63.4 L1332 68.2 L1338 72.6 L1344 71.7 L1350 63.0 L1356 52.4 L1362 48.7 L1368 53.4 L1374 60.4 L1380 65.7 L1386 70.7 L1392 76.9 L1398 79.7 L1404 73.8 L1410 61.9 L1416 52.8 L1422 51.0 L1428 52.7 L1434 53.4 L1440 54.7 L1446 59.7 L1452 65.6 L1458 65.8 L1464 58.7 L1470 51.0 L1476 48.5 L1482 49.7 L1488 49.8 L1494 49.9 L1500 54.5 L1506 63.6 L1512 70.2 L1518 69.4 L1524 64.5 L1530 61.6 L1536 61.3 L1542 59.6 L1548 56.4 L1554 57.3 L1560 63.4 L1566 62.5 L1572 55.0 L1578 60.9 L1584 65.3 L1590 62.5 L1596 56.4 L1602 47.9 L1608 43.0 L1614 47.3 L1620 57.7 L1626 65.6 L1632 66.6 L1638 64.3 L1644 61.7 L1650 57.1 L1656 48.3 L1662 40.4 L1668 40.9 L1674 50.7 L1680 62.1 L1686 68.5 L1692 71.1 L1698 73.2 L1704 73.2 L1710 67.4 L1716 57.8 L1722 52.4 L1728 55.6 L1734 62.6 L1740 66.9 L1746 68.0 L1752 69.9 L1758 72.0 L1764 69.3 L1770 60.2 L1776 51.1 L1782 48.4 L1788 51.1 L1794 53.3 L1800 53.5 L1806 55.8 L1812 61.3 L1818 64.5 L1824 60.6 L1830 52.9 L1836 48.6 L1842 50.0 L1848 52.5 L1854 54.1 L1860 58.0 L1866 66.9 L1872 75.9 L1878 77.2 L1884 70.6 L1890 62.8 L1896 58.9 L1902 57.0 L1908 54.6 L1914 54.9 L1920 62.0 L1926 72.6 L1932 78.0 L1938 73.8 L1944 64.7 L1950 57.0 L1956 51.2 L1962 44.9 L1968 40.4 L1974 43.6 L1980 54.3 L1986 64.7 L1992 67.5 L1998 64.1 L2004 60.5 L2010 58.1 L2016 53.7 L2022 48.0 L2028 47.1 L2034 54.5 L2040 65.3 L2046 71.5 L2052 71.8 L2058 71.0 L2064 71.3 L2070 69.0 L2076 62.0 L2082 55.3 L2088 55.3 L2094 61.0 L2100 65.5 L2106 65.5 L2112 64.6 L2118 65.6 L2124 65.0 L2130 58.4 L2136 48.7 L2142 43.6 L2148 46.2 L2154 51.3 L2160 52.9 L2166 46.0 L2172 41.3 L2178 56.5 L2184 64.6 L2190 57.3 L2196 49.3 L2202 48.2 L2208 52.5 L2214 57.3 L2220 62.3 L2226 70.4 L2232 79.6 L2238 82.2 L2244 74.7 L2250 62.9 L2256 55.2 L2262 53.2 L2268 52.9 L2274 53.3 L2280 57.9 L2286 66.9 L2292 73.4 L2298 70.7 L2304 61.1 L2310 52.6 L2316 48.8 L2322 46.6 L2328 44.2 L2334 45.3 L2340 53.1 L2346 63.1 L2352 67.5 L2358 64.8 L2364 60.8 L2370 59.8 L2376 59.4 L2382 56.5 L2388 54.0 L2394 57.6 L2400 66.5" />
+        </svg>
+        <div class="container contact__inner">
+          <p class="section-label section-label--light" data-reveal><span>04</span> Contato</p>
+          <h2 class="contact__title" id="contact-title" data-reveal style="--d: 80ms">
+            Vamos conversar sobre <em>a sua saúde cognitiva.</em>
+          </h2>
+          <div class="contact__actions" data-reveal style="--d: 160ms">
+            <a href="https://wa.me/556139991126" class="btn" target="_blank" rel="noopener">
+              <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.9 7.2c-.2 0-.5 0-.8.3-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.5 2.6 1 3.1.8 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.6-.3-2-1c-.3-.1-.5-.2-.7.2l-.9 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5L9.8 7.6c-.2-.5-.5-.4-.7-.4h-.2z"/></svg>
+              Agendar pelo WhatsApp
+            </a>
+            <a href="tel:+556139991126" class="contact__phone">(61) 3999-1126</a>
           </div>
-
-          <div class="local__card">
-            <p class="card__title">Centro Médico Santa Luzia</p>
-            <p class="local__card__text">
-              Edifício OHB SHLS 716 Conjunto A Bloco B - Asa sul.
-            </p>
-            <p class="local__card__text">
-                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg> <a href="tel:+5561991225014" class="local__card__phone">(61) 99122-5014</a>
-            </p>
-            <a
-              href="https://www.google.com/maps/place/Centro+M%C3%A9dico+Santa+Luzia:+Consultas,+Centro+M%C3%A9dico,+Multicl%C3%ADnica,+Cl%C3%ADnica+M%C3%A9dica,+Bras%C3%ADlia+DF/@-15.8258699,-47.9287773,15z/data=!4m6!3m5!1s0x935a31cbc9e81fdb:0x6384e252cd146530!8m2!3d-15.8258699!4d-47.9287773!16s%2Fg%2F11g0j6tjkg?entry=ttu"
-              class="btn"
-              target="_blank"
-              >LOCALIZAÇÃO</a
-            >
-          </div>
-
-          <div class="local__card">
-            <p class="card__title">Hospital DF Star</p>
-            <p class="local__card__text">
-              SGAS 914 Conjunto B Lote 68A - Asa Sul.
-            </p>
-            <p class="local__card__text">
-                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg> <a href="tel:+5561999291934" class="local__card__phone">(61) 99929-1934</a>
-            </p>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Hospital+DF+Star+Brasilia"
-              class="btn"
-              target="_blank"
-              >LOCALIZAÇÃO</a
-            >
-          </div>
-
-          <div class="local__card">
-            <p class="card__title">Clínica Neurostart</p>
-            <p class="local__card__text">
-              SGAS 915 - Centro Clínico Advance 1.
-            </p>
-            <p class="local__card__text">
-                <svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 2.8 9 2.2c.6-.1 1.2.2 1.4.8l1.4 3.3c.2.5.1 1.1-.3 1.5L9.9 9.2a12 12 0 0 0 4.9 4.9l1.4-1.6c.4-.4 1-.5 1.5-.3l3.3 1.4c.6.2.9.8.8 1.4l-.6 2.4c-.2.7-.8 1.2-1.5 1.2C10.9 18.6 5.4 13.1 5.4 4.3c0-.7.5-1.3 1.2-1.5z"/></svg> <a href="tel:+556139991126" class="local__card__phone">(61) 3999-1126</a>
-            </p>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Neurostart+Brasilia"
-              class="btn"
-              target="_blank"
-              >LOCALIZAÇÃO</a
-            >
-          </div>
-
         </div>
       </section>
     </main>
 
-    <footer class="l-footer">
-      <div class="footer__data">
-        <img
-          src="./assets/img/logo.svg"
-          alt="Dr. Hugo Ary Oliveira Silva - Neurologista em Brasília"
-          class="footer__logo"
-        />
-        <div class="footer__info">
-          <p class="footer__text">
-            Neurologista <br />
-            Especialista em Cognição e Comportamento
-          </p>
-          <p class="footer__text">CRM-DF 19610 / RQE 17996</p>
-          <p class="footer__phone">
-            <svg class="svg-icon svg-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.9 7.2c-.2 0-.5 0-.8.3-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.5 2.6 1 3.1.8 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.6-.3-2-1c-.3-.1-.5-.2-.7.2l-.9 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5L9.8 7.6c-.2-.5-.5-.4-.7-.4h-.2z"/></svg><span>61 3999-1126</span>
+    <footer class="footer" data-nav-theme="dark">
+      <div class="container">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <img
+              src="./assets/img/logo-light.svg"
+              alt="Dr. Hugo Ary Oliveira Silva - Neurologista em Brasília"
+              class="footer__logo"
+              width="152"
+              height="36"
+              loading="lazy"
+            />
+            <p class="footer__text">
+              Neurologista <br />
+              Especialista em Cognição e Comportamento
+            </p>
+            <p class="footer__text footer__text--muted">CRM-DF 19610 / RQE 17996</p>
+          </div>
+
+          <nav class="footer__nav" aria-label="Rodapé">
+            <p class="footer__heading">Navegação</p>
+            <a href="#sobre">Sobre</a>
+            <a href="#especialidades">Especialidades</a>
+            <a href="#clinicas">Clínicas</a>
+            <a href="./avaliacao-neurocognitiva.html">Avaliação neurocognitiva</a>
+            <a href="./tap-test.html">TAP Test</a>
+          </nav>
+
+          <div class="footer__nav">
+            <p class="footer__heading">Contato</p>
+            <a href="https://wa.me/556139991126" target="_blank" rel="noopener" class="footer__phone">
+              <svg class="svg-icon svg-icon--whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.9 7.2c-.2 0-.5 0-.8.3-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.5 2.6 1 3.1.8 3.6.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-.6-.3-2-1c-.3-.1-.5-.2-.7.2l-.9 1.2c-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5L9.8 7.6c-.2-.5-.5-.4-.7-.4h-.2z"/></svg><span>61 3999-1126</span>
+            </a>
+            <p class="footer__text footer__text--muted">Brasília · Distrito Federal</p>
+          </div>
+        </div>
+
+        <div class="footer__rights">
+          <p>Dr. Hugo Ary Oliveira Silva © 2026 - Todos os direitos reservados</p>
+          <p>
+            Desenvolvido por
+            <a
+              target="_blank"
+              href="mailto:raionylucas7@gmail.com?subject=Desenvolvimento de Website"
+              >Lucas Raiony</a
+            >
           </p>
         </div>
-      </div>
-      <div class="footer__rights">
-        <p>Dr. Hugo Ary Oliveira Silva © 2026 - Todos os direitos reservados</p>
-        <p>
-          Desenvolvido por
-          <a
-            target="_blank"
-            href="mailto:raionylucas7@gmail.com?subject=Desenvolvimento de Website"
-            >Lucas Raiony</a
-          >
-        </p>
       </div>
     </footer>
     <!-- Dados estruturados: descrevem o médico e os consultórios em formato
@@ -518,6 +600,6 @@
         ]
       }
     </script>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script.js" defer></script>
   </body>
 </html>
