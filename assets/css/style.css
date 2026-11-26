@@ -1,539 +1,1553 @@
-/* As fontes (Montserrat/Poppins) são carregadas por <link> no <head> do
-   HTML, com preconnect, em vez de @import aqui: evita a cadeia
-   CSS -> Google Fonts que atrasa a primeira renderização. */
+/* ==========================================================================
+   Dr. Hugo Ary Oliveira Silva — Neurologista
+   Direção visual: editorial e clínica. Papel claro para leitura, "noite"
+   profunda para os momentos neurais (hero, manifesto, contato), um único
+   verde de marca como sinal elétrico.
 
-/* Ícones inline em SVG (substituem o Font Awesome, que baixava a biblioteca
-   inteira para três ícones). */
-.svg-icon {
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-  vertical-align: -0.125em;
-  flex-shrink: 0;
-}
-.svg-icon--nav {
-  margin-right: 6px;
-  color: #2d7db0;
-}
-.svg-icon--whatsapp {
-  color: #4fbe89;
-}
+   Movimento (referência: emilkowalski/skills):
+   - só transform, opacity e clip-path são animados;
+   - curvas fortes e próprias (--ease-out para entradas, --ease-in-out para
+     movimento em cena), nunca ease-in;
+   - uma entrada por contêiner, atrasos não uniformes;
+   - hover só em dispositivos com ponteiro fino;
+   - prefers-reduced-motion colapsa a coreografia para opacidade.
+   ========================================================================== */
 
-.mb__menu,
-.nav {
-  position: fixed;
-}
-.btn,
-.nav__link {
-  text-decoration: none;
-  color: var(--black);
-}
 :root {
-  --font-regular: 400;
-  --font-medium: 500;
-  --green: #54c791;
-  --green-hover: #45b581;
-  --green-dark: #2f8a60;
-  --white: #fff;
-  --offwhite: #f5f7f6;
-  --black: #000;
-  --acqua-green: #e8f2ed;
-  --h1-font-size: 3rem;
-  --h2-font-size: 1.5rem;
-  --p-font-size: 1rem;
-  --card-font-size: 0.87rem;
-  --small-font-size: 0.75rem;
-  --nav-height: 56px;
-  --section-padding: 112px;
-  --gutter: 88px;
+  /* Cor */
+  --paper: #f1f2ec;
+  --paper-2: #e7e9e1;
+  --surface: #fbfbf8;
+  --ink: #0d1612;
+  --ink-2: #3a4741;
+  --ink-3: #66726c;
+  --line: rgba(13, 22, 18, 0.12);
+  --night: #07110d;
+  --night-2: #0c1b15;
+  --night-line: rgba(209, 240, 223, 0.12);
+  --on-night: #e9f1ec;
+  --on-night-2: rgba(233, 241, 236, 0.62);
+  --green: #54c791; /* verde da marca */
+  --green-hover: #6bd6a3;
+  --green-deep: #1d7650; /* verde para texto sobre papel (contraste AA) */
+  --glow: #8ff0bf;
+
+  /* Tipografia */
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --fs-display: clamp(3rem, 1.6rem + 6.4vw, 7.25rem);
+  --fs-h2: clamp(2.1rem, 1.4rem + 2.9vw, 3.9rem);
+  --fs-manifesto: clamp(1.9rem, 1.1rem + 3.4vw, 4.1rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Espaço */
+  --nav-height: 72px;
+  --gutter: clamp(20px, 5vw, 88px);
+  --section-y: clamp(96px, 12vw, 176px);
+  --radius: 20px;
 }
-* {
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
-body {
-  font-family: Montserrat, sans-serif;
-  line-height: 1.5;
-}
+
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+::selection {
+  background: var(--green);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) - 1px);
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 300;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--ink);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 200ms var(--ease-out);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Ícones inline em SVG (sem biblioteca de ícones). */
+.svg-icon {
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.svg-icon--whatsapp {
+  color: var(--green);
+}
+
+/* --------------------------------------------------------------------------
+   Botões
+   Pressionar responde na hora: scale(0.97) em 160ms ease-out.
+   -------------------------------------------------------------------------- */
+.btn {
+  --btn-bg: var(--green);
+  --btn-fg: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: 600 0.9375rem/1 var(--font-sans);
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out), background-color 200ms ease,
+    border-color 200ms ease, color 200ms ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn--sm {
+  min-height: 40px;
+  padding: 0 18px;
+  font-size: var(--fs-small);
+}
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--on-night);
+  border-color: var(--night-line);
+}
+.btn--dark {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+}
+.btn__arrow {
+  transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    --btn-bg: var(--green-hover);
+  }
+  .btn--ghost:hover {
+    --btn-bg: rgba(233, 241, 236, 0.06);
+    border-color: rgba(233, 241, 236, 0.32);
+  }
+  .btn--dark:hover {
+    --btn-bg: #1c2a24;
+  }
+  .btn:hover .btn__arrow {
+    transform: translateX(3px);
   }
 }
-/* A nav é fixa: ao navegar por âncora, o topo da seção não fica escondido
-   atrás dela. */
-section[id] {
-  scroll-margin-top: var(--nav-height);
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding: 4px 0;
 }
+.text-link span {
+  transition: transform 200ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .text-link:hover span {
+    transform: translateX(3px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Rótulos e títulos de seção
+   -------------------------------------------------------------------------- */
+.eyebrow,
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 400 var(--fs-micro) / 1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.section-label {
+  color: var(--ink-3);
+  margin-bottom: 28px;
+}
+.section-label span {
+  color: var(--green-deep);
+}
+.section-label--light {
+  color: var(--on-night-2);
+}
+.section-label--light span {
+  color: var(--green);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.section-title em {
+  color: var(--green-deep);
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+
+/* --------------------------------------------------------------------------
+   Navegação
+   O cabeçalho troca de tema (claro/escuro) conforme a seção que está por
+   baixo dele, e se recolhe ao rolar para baixo.
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  color: var(--on-night);
+  transition: transform 320ms var(--ease-out), color 240ms ease;
+}
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: var(--nav-height);
+  background: rgba(7, 17, 13, 0.72);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--night-line);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.site-header.is-scrolled::before {
+  opacity: 1;
+}
+.site-header[data-theme="light"] {
+  color: var(--ink);
+}
+.site-header[data-theme="light"]::before {
+  background: rgba(241, 242, 236, 0.78);
+  border-bottom-color: var(--line);
+}
+
 .nav {
-  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 32px;
   height: var(--nav-height);
   padding: 0 var(--gutter);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  background: var(--white);
-  z-index: 100;
+  max-width: 1500px;
+  margin: 0 auto;
 }
+
+.nav__logo {
+  position: relative;
+  display: block;
+  width: 152px;
+  height: 36px;
+  margin-right: auto;
+}
+.nav__logo-img {
+  position: absolute;
+  inset: 0;
+  transition: opacity 240ms ease;
+}
+.nav__logo-img--dark,
+.site-header[data-theme="light"] .nav__logo-img--light {
+  opacity: 0;
+}
+.site-header[data-theme="light"] .nav__logo-img--dark {
+  opacity: 1;
+}
+
 .nav__list {
   display: flex;
-  gap: 40px;
-}
-.nav__item {
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-}
-.nav__line {
-  display: block;
-  width: 0;
-  height: 1px;
-  margin-top: 4px;
-  background: 0 0;
-}
-.mb__menu,
-.mb__menu__icon {
-  display: none;
-}
-.nav__item:hover .nav__line {
-  background: var(--green);
-  width: 20px;
-  transition: 0.3s;
+  gap: 30px;
 }
 .nav__link {
-  font-size: var(--small-font-size);
-  font-weight: var(--font-medium);
+  position: relative;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  text-decoration: none;
   white-space: nowrap;
+  opacity: 0.78;
+  transition: opacity 200ms ease;
 }
-.nav__item:hover .nav__link {
-  color: var(--green-dark);
-}
-/* Botão do menu móvel com área de toque de ~50×41px (o ícone tem 26×17). */
-.mb__menu__btn {
-  display: inline-flex;
-  padding: 12px;
-  margin-right: -12px;
-  border: none;
-  background: 0 0;
-  cursor: pointer;
-}
-.mb__menu {
-  padding-top: 100px;
-  background: var(--white);
-  width: 100%;
-  height: 430px;
-  box-shadow: 0 10px 10px 1px rgba(0, 0, 0, 0.2);
-}
-.about,
-.home {
-  display: flex;
-}
-.mb__menu .nav__list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.mb__menu .nav__link {
-  display: block;
-  padding: 8px 16px;
-  font-size: var(--p-font-size);
-}
-.home {
-  width: 100%;
-  height: 100vh;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  padding: var(--nav-height) var(--gutter) 0;
-  background-color: var(--offwhite);
-}
-.home__title {
-  font-size: var(--h1-font-size);
-  font-weight: var(--font-regular);
-  line-height: 1.15;
-  margin: 0 16px 16px 0;
-}
-/* "NEUROLOGISTA" continua dentro do h1 (SEO), mas como linha de apoio ao
-   nome, em vez de competir com ele no mesmo tamanho. */
-.home__title__role {
-  display: block;
-  font-size: 0.55em;
-  font-weight: var(--font-medium);
-  letter-spacing: 0.12em;
-  margin-top: 0.35em;
-}
-.home__info,
-.home__subtitle {
-  font-size: var(--p-font-size);
-}
-.home__subtitle {
-  margin-bottom: 40px;
-}
-.home__info {
-  margin-bottom: 56px;
-}
-.home__img {
-  /* Entre 993 e 1200px a ilustração cede um pouco para o texto respirar. */
-  max-width: min(456px, 36vw);
-  max-height: 480px;
-  width: auto;
-  height: auto;
-}
-.about {
-  width: 100%;
-  align-items: center;
-  gap: var(--gutter);
-  padding: var(--section-padding) var(--gutter);
-}
-.about__info,
-.services {
-  flex-direction: column;
-  display: flex;
-}
-/* A foto declara width/height no HTML (evita layout shift). Como o CSS
-   sobrescreve só a largura, a altura precisa voltar a "auto" para a
-   proporção original ser mantida — sem isso a imagem fica esticada. */
-.about > picture {
-  flex: 0 1 450px;
-  min-width: 0;
-}
-.about__img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-}
-.about__data {
-  flex: 1 1 50%;
-  min-width: 0;
-}
-.about__title,
-.local__title,
-.services__title {
-  font-size: var(--h2-font-size);
-  font-weight: var(--font-regular);
-  margin-bottom: 4px;
-}
-.about__info {
-  gap: 40px;
-  margin-bottom: 80px;
-}
-.line__title {
-  display: block;
-  width: 40px;
+/* Sublinhado que "conduz" da esquerda para a direita. */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
   height: 1px;
   background: var(--green);
-  margin-bottom: 84px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 240ms var(--ease-out);
 }
-.about__item {
-  display: flex;
-  align-items: center;
-  font-size: var(--p-font-size);
+@media (hover: hover) and (pointer: fine) {
+  .nav__link:hover {
+    opacity: 1;
+  }
+  .nav__link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 }
-.about__icon {
-  width: 30px;
-  height: 30px;
-  margin-right: 22px;
-}
-.services {
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  padding: var(--section-padding) var(--gutter);
-  background: var(--offwhite);
-}
-.services__card,
-.services__data {
-  display: flex;
-  flex-direction: column;
-}
-.services__data {
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-.services__wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  margin-bottom: 72px;
-}
-/* Os cards encolhem um pouco (até ~187px) entre 1201 e 1360px para
-   respeitar as margens laterais; acima disso voltam aos 219px. */
-.services__card {
-  flex: 1 1 0;
-  min-width: 0;
-  max-width: 219px;
-  height: 222px;
-  padding: 0 20px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: var(--acqua-green);
-  border-radius: 16px;
-}
-.services__card__icon {
-  width: 69px;
-  height: 69px;
-  margin-bottom: 16px;
-}
-.services__card__text {
-  font-size: var(--card-font-size);
-  max-width: 163px;
-}
-.local,
-.local__wrapper {
-  width: 100%;
-  display: flex;
-}
-.local {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: var(--section-padding) var(--gutter);
-}
-.local__wrapper {
-  justify-content: center;
-  gap: 32px;
-}
-.local__card {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  padding: 40px 32px;
-  border: solid 1px var(--green);
-  border-radius: 16px;
-}
-/* Botões alinhados na mesma linha em todos os cards, independentemente do
-   tamanho do endereço. */
-.local__card .btn {
-  margin-top: auto;
-  align-self: flex-start;
-}
-.card__title {
-  font-size: var(--p-font-size);
-  margin-bottom: 20px;
-}
-.local__card__text {
-  width: 100%;
-  font-size: var(--small-font-size);
-  margin-bottom: 40px;
-}
-/* Telefone é link tel: (discagem em 1 toque no celular), mas mantém a
-   aparência do texto do cartão. O padding vertical garante área de toque
-   mínima de 24px. */
-.local__card__phone {
-  display: inline-block;
-  padding: 6px 0;
+
+.nav__toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  border: 0;
+  background: transparent;
   color: inherit;
+  cursor: pointer;
+}
+.nav__toggle-line {
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 240ms var(--ease-out);
+}
+.nav__toggle-line:first-child {
+  transform: translateY(-4px);
+}
+.nav__toggle-line:last-child {
+  transform: translateY(4px);
+}
+.nav__toggle[aria-expanded="true"] .nav__toggle-line:first-child {
+  transform: rotate(45deg);
+}
+.nav__toggle[aria-expanded="true"] .nav__toggle-line:last-child {
+  transform: rotate(-45deg);
+}
+
+/* Menu móvel: aberto com frequência, então é uma única entrada rápida do
+   painel inteiro — sem cascata nos itens. Fecha mais rápido do que abre. */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--nav-height) + 32px) var(--gutter) 40px;
+  background: var(--night);
+  color: var(--on-night);
+  opacity: 0;
+  transform: translateY(-12px);
+  visibility: hidden;
+  transition: opacity 180ms ease, transform 180ms var(--ease-out),
+    visibility 0s linear 180ms;
+}
+.mobile-menu.is-open {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition: opacity 260ms ease, transform 260ms var(--ease-out),
+    visibility 0s;
+}
+.mobile-menu__list {
+  display: flex;
+  flex-direction: column;
+}
+.mobile-menu__link {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--night-line);
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  line-height: 1.15;
   text-decoration: none;
 }
-.local__card__phone:hover,
-.local__card__phone:focus-visible {
-  text-decoration: underline;
+.mobile-menu__cta {
+  align-self: stretch;
 }
-.footer__data {
-  width: 100%;
-  min-height: 384px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px 64px;
-  padding: 64px var(--gutter);
-  background: var(--offwhite);
+.site-header.menu-open {
+  color: var(--on-night);
 }
-.footer__logo {
-  width: 435px;
-  max-width: 100%;
-  height: auto;
+.site-header.menu-open::before {
+  opacity: 0;
 }
-.footer__info {
+.site-header.menu-open .nav__logo-img--light {
+  opacity: 1;
+}
+.site-header.menu-open .nav__logo-img--dark {
+  opacity: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  font-size: var(--p-font-size);
+  justify-content: center;
+  padding: calc(var(--nav-height) + 48px) var(--gutter) 120px;
+  background: radial-gradient(
+      120% 90% at 78% 45%,
+      #0f2a1f 0%,
+      var(--night-2) 38%,
+      var(--night) 72%
+    );
+  color: var(--on-night);
+  overflow: hidden;
+  isolation: isolate;
 }
-.btn,
-.footer__rights p {
-  font-size: var(--small-font-size);
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 1200ms var(--ease-out);
+}
+.hero__canvas.is-ready {
+  opacity: 1;
+}
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+      90deg,
+      rgba(7, 17, 13, 0.85) 0%,
+      rgba(7, 17, 13, 0.4) 38%,
+      rgba(7, 17, 13, 0) 60%
+    ),
+    linear-gradient(0deg, var(--night) 0%, rgba(7, 17, 13, 0) 22%);
+}
+
+.hero__inner {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.hero__eyebrow {
+  color: var(--on-night-2);
+  margin-bottom: 36px;
+}
+.eyebrow__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px rgba(84, 199, 145, 0.16);
+}
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-display);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  margin-bottom: 36px;
+}
+.hero__line {
+  display: block;
+  overflow: hidden;
+  /* espaço para descendentes/itálico não serem cortados pela máscara */
+  padding: 0 0.08em 0.16em 0;
+  margin-bottom: -0.16em;
+}
+.hero__line-inner {
+  display: block;
+}
+.hero__title em {
+  color: var(--glow);
+}
+.hero__role {
+  display: block;
+  margin-top: 22px;
+  font: 500 var(--fs-micro) / 1.4 var(--font-mono);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--on-night-2);
+}
+
+.hero__lede {
+  max-width: 34ch;
+  margin-bottom: 40px;
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--on-night-2);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.hero__crm {
+  font: 400 var(--fs-micro) / 1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--on-night-2);
+}
+
+.hero__caption {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 36px;
+  max-width: 360px;
+  font: 400 0.6875rem / 1.5 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: rgba(233, 241, 236, 0.45);
+  text-align: right;
+}
+.hero__caption span:first-child {
+  color: var(--green);
+  margin-right: 8px;
+}
+
+/* Coreografia de entrada do hero (vista uma vez por visita: tempo de
+   "marketing", 600–900ms, atrasos que encurtam — uma onda, não uma fila).
+   Líder: o nome. Apoio: texto e ações. Decoração: rótulos — só opacidade. */
+@keyframes rise-in {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.hero__line-inner {
+  animation: rise-in 1000ms var(--ease-out) both;
+}
+.hero__line:nth-child(1) .hero__line-inner {
+  animation-delay: 150ms;
+}
+.hero__line:nth-child(2) .hero__line-inner {
+  animation-delay: 250ms;
+}
+.hero__eyebrow {
+  animation: fade-in 700ms ease both 100ms;
+}
+.hero__role {
+  animation: fade-in 700ms ease both 420ms;
+}
+.hero__lede {
+  animation: fade-up 800ms var(--ease-out) both 440ms;
+}
+.hero__actions {
+  animation: fade-up 800ms var(--ease-out) both 510ms;
+}
+.hero__crm {
+  animation: fade-in 700ms ease both 580ms;
+}
+.hero__caption {
+  animation: fade-in 900ms ease both 1200ms;
+}
+
+/* --------------------------------------------------------------------------
+   Revelações no scroll (só com JS; uma vez por elemento)
+   -------------------------------------------------------------------------- */
+.js [data-reveal]:not([data-reveal="image"]):not([data-reveal="axon"]):not([data-reveal="group"]) {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms ease var(--d, 0ms),
+    transform 900ms var(--ease-out) var(--d, 0ms);
+}
+.js [data-reveal]:not([data-reveal="image"]):not([data-reveal="axon"]):not([data-reveal="group"]).is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Grupos: o contêiner não se move; os filhos chegam numa onda curta. */
+.js [data-reveal="group"] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease var(--d, 0ms),
+    transform 900ms var(--ease-out) var(--d, 0ms);
+}
+.js [data-reveal="group"].is-in > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Sobre
+   -------------------------------------------------------------------------- */
+.about {
+  padding: var(--section-y) 0;
+}
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 8vw, 128px);
+  align-items: start;
+}
+
+.about__figure {
+  position: sticky;
+  top: calc(var(--nav-height) + 32px);
+}
+.about__figure picture {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+}
+.about__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 918 / 1064;
+  object-fit: cover;
+}
+.about__caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+  font: 400 var(--fs-micro) / 1.5 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.about__caption span {
+  color: var(--ink-2);
+}
+
+/* Revelação da foto: a máscara sobe de baixo (clip-path) enquanto a imagem
+   assenta de uma leve ampliação — profundidade sem deslocar o layout. */
+.js [data-reveal="image"] picture {
+  clip-path: inset(100% 0 0 0 round var(--radius));
+  transition: clip-path 1100ms var(--ease-in-out);
+}
+.js [data-reveal="image"] .about__img {
+  transform: scale(1.12);
+  transition: transform 1600ms var(--ease-out);
+}
+.js [data-reveal="image"].is-in picture {
+  clip-path: inset(0 0 0 0 round var(--radius));
+}
+.js [data-reveal="image"].is-in .about__img {
+  transform: none;
+}
+
+.about__content .section-title {
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+/* Trajetória como axônio. A linha é desenhada com scaleY; um "sinal" a
+   percorre no mesmo tempo e curva, e cada etapa acende quando ele chega
+   (atrasos sincronizados com a posição do nó). */
+.axon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 56px;
+  padding-left: 40px;
+}
+.axon__track {
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+.axon__track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--green-deep);
+  transform-origin: top;
+}
+.axon__signal {
+  position: absolute;
+  inset: 0;
+}
+.axon__signal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 64px;
+  background: linear-gradient(to bottom, transparent, var(--glow));
+}
+.axon__item {
+  position: relative;
+  font-size: clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 46ch;
+}
+.axon__label {
+  display: block;
+  margin-bottom: 6px;
+  font: 400 var(--fs-micro) / 1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.axon__node {
+  position: absolute;
+  left: -40px;
+  top: 4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-3);
+  background: var(--paper);
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+.axon__node::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--green);
+  opacity: 0;
+}
+
+.js [data-reveal="axon"] .axon__track::before {
+  transform: scaleY(0);
+  transition: transform 1300ms var(--ease-in-out);
+}
+.js [data-reveal="axon"] .axon__signal {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 1300ms var(--ease-in-out), opacity 400ms ease 1200ms;
+}
+.js [data-reveal="axon"] .axon__item {
+  opacity: 0.28;
+  transition: opacity 600ms ease var(--d, 0ms);
+}
+.js [data-reveal="axon"] .axon__node {
+  transition-delay: var(--d, 0ms);
+}
+.js [data-reveal="axon"].is-in .axon__track::before {
+  transform: scaleY(1);
+}
+.js [data-reveal="axon"].is-in .axon__signal {
+  transform: translateY(0);
+  opacity: 0;
+  animation: signal-visible 1300ms linear both;
+}
+@keyframes signal-visible {
+  0%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.js [data-reveal="axon"].is-in .axon__item {
+  opacity: 1;
+}
+.js [data-reveal="axon"].is-in .axon__node {
+  background: var(--green);
+  border-color: var(--green-deep);
+}
+.js [data-reveal="axon"].is-in .axon__node::after {
+  animation: node-ping 900ms var(--ease-out) both var(--d, 0ms);
+}
+/* Sem JS a trajetória aparece acesa. */
+html:not(.js) .axon__track::before {
+  transform: none;
+}
+html:not(.js) .axon__node {
+  background: var(--green);
+  border-color: var(--green-deep);
+}
+@keyframes node-ping {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Manifesto
+   -------------------------------------------------------------------------- */
+.manifesto {
+  padding: var(--section-y) 0;
+  background: var(--night);
+  color: var(--on-night);
+}
+.manifesto__text {
+  max-width: 24ch;
+  font-family: var(--font-serif);
+  font-size: var(--fs-manifesto);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+.manifesto__text em {
+  color: var(--glow);
+}
+.manifesto__word {
+  opacity: 0.16;
+  transition: opacity 260ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   Especialidades
+   -------------------------------------------------------------------------- */
+.services {
+  padding: var(--section-y) 0;
+  background: var(--paper);
+}
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.card {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+  padding: 36px 32px 32px;
+  background: var(--surface);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Holofote de atenção: segue o ponteiro dentro do card. As variáveis ficam
+   no próprio card (não no grid), para não recalcular estilos de vizinhos. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    420px circle at var(--mx) var(--my),
+    rgba(84, 199, 145, 0.14),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.card__index {
+  font: 400 var(--fs-micro) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.card__icon {
+  width: 56px;
+  height: 56px;
+  margin: 40px 0 auto;
+  color: var(--green-deep);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.card__title {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 1.3rem + 0.8vw, 2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.card__text {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+.card--tools {
+  background: var(--paper-2);
+}
+.card--tools .card__title {
+  margin-top: auto;
+}
+.card__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* Ícones vivos: cada um encena o tema do card. Repousam estáticos; ao
+   passar o ponteiro (ou focar), executam a micro-história uma vez. */
+.card__icon circle {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* Memória — o engrama se traça entre os pontos. */
+.icon-memory__trace {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  opacity: 0.55;
+}
+
+/* Atenção — o anel se fecha e o ruído ao redor esmaece. */
+.icon-focus .icon-focus__ring {
+  fill: none;
+  stroke: currentColor;
+  transform-origin: 24px 24px;
+  transition: transform 500ms var(--ease-out);
+}
+.icon-focus__noise {
+  transition: opacity 400ms ease;
+}
+.icon-focus__noise circle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Neurônio — um potencial de ação corre pelo axônio. */
+.icon-neuron .icon-neuron__axon {
+  opacity: 0.55;
+}
+.icon-neuron circle {
+  fill: none;
+  stroke: currentColor;
+}
+.icon-neuron__spike {
+  stroke: var(--green);
+  stroke-width: 2.4;
+  stroke-dasharray: 0.18 1.2;
+  stroke-dashoffset: 0.18;
+  opacity: 0;
+}
+
+/* Espectro — frequências diferentes deslizam lado a lado. */
+.icon-spectrum__wave {
+  transition: transform 0s;
+}
+.icon-spectrum__wave--b {
+  opacity: 0.75;
+}
+.icon-spectrum__wave--c {
+  opacity: 0.5;
+}
+
+/* Sinapse — vesículas atravessam a fenda e o terminal pós-sináptico acende. */
+.icon-synapse__vesicles circle {
+  transition: transform 500ms var(--ease-out);
+}
+.icon-synapse__post {
+  opacity: 0.55;
+  transition: opacity 300ms ease 200ms;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover::before {
+    opacity: 1;
+  }
+  .card:hover .icon-memory__trace {
+    opacity: 1;
+    animation: trace 900ms var(--ease-in-out) both;
+  }
+  .card:hover .icon-focus__ring {
+    transform: scale(0.62);
+  }
+  .card:hover .icon-focus__noise {
+    opacity: 0.22;
+  }
+  .card:hover .icon-neuron__spike {
+    animation: spike 1400ms linear infinite;
+  }
+  .card:hover .icon-spectrum__wave--a {
+    animation: wave 1.6s linear infinite;
+  }
+  .card:hover .icon-spectrum__wave--b {
+    animation: wave 2.4s linear infinite;
+  }
+  .card:hover .icon-spectrum__wave--c {
+    animation: wave 3.6s linear infinite;
+  }
+  .card:hover .icon-synapse__vesicles circle {
+    transform: translateX(7px);
+  }
+  .card:hover .icon-synapse__vesicles circle:nth-child(2) {
+    transition-delay: 60ms;
+  }
+  .card:hover .icon-synapse__vesicles circle:nth-child(3) {
+    transition-delay: 100ms;
+  }
+  .card:hover .icon-synapse__post {
+    opacity: 1;
+  }
+}
+@keyframes trace {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes spike {
+  0% {
+    stroke-dashoffset: 0.18;
+    opacity: 1;
+  }
+  70% {
+    stroke-dashoffset: -1;
+    opacity: 1;
+  }
+  71%,
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+}
+@keyframes wave {
+  to {
+    transform: translateX(-16px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Clínicas
+   -------------------------------------------------------------------------- */
+.local {
+  padding: 0 0 var(--section-y);
+  background: var(--paper);
+}
+.local__list {
+  border-top: 1px solid var(--line);
+}
+.place {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 24px 40px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+/* Linha de "ativação" que percorre a base ao passar o ponteiro. */
+.place::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--green-deep);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 500ms var(--ease-out);
+}
+.place__index {
+  font: 400 var(--fs-micro) / 1 var(--font-mono);
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.place__name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 1.25rem + 1vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.place__address {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+.place__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.place__phone .svg-icon {
+  color: var(--green-deep);
+}
+.place__map {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 160ms var(--ease-out), background-color 200ms ease,
+    border-color 200ms ease, color 200ms ease;
+}
+.place__map:active {
+  transform: scale(0.97);
+}
+.place__map span {
+  transition: transform 200ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .place:hover::after {
+    transform: scaleX(1);
+  }
+  .place__phone:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .place__map:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .place__map:hover span {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Contato
+   -------------------------------------------------------------------------- */
+.contact {
+  position: relative;
+  padding: var(--section-y) 0;
+  background: var(--night);
+  color: var(--on-night);
+  overflow: hidden;
+  isolation: isolate;
+}
+.contact__eeg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  width: 100%;
+  height: 140px;
+  transform: translateY(-50%);
+  z-index: -1;
+  overflow: visible;
+  opacity: 0.5;
+  /* esmaece nas bordas, como um traçado que entra e sai do monitor */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+}
+.contact__eeg-path {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  animation: eeg 14s linear infinite;
+}
+.contact.is-paused .contact__eeg-path {
+  animation-play-state: paused;
+}
+@keyframes eeg {
+  to {
+    transform: translateX(-1200px);
+  }
+}
+.contact__inner {
+  position: relative;
+}
+.contact__title {
+  max-width: 16ch;
+  margin-bottom: 48px;
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 1.5rem + 4.2vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.contact__title em {
+  color: var(--glow);
+}
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}
+.contact__phone {
+  font: 400 1rem / 1 var(--font-mono);
+  letter-spacing: 0.04em;
+  color: var(--on-night-2);
+  text-decoration: none;
+  padding: 12px 0;
+  transition: color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .contact__phone:hover {
+    color: var(--on-night);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Rodapé
+   -------------------------------------------------------------------------- */
+.footer {
+  padding: 80px 0 0;
+  background: var(--night);
+  color: var(--on-night);
+  border-top: 1px solid var(--night-line);
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  padding-bottom: 64px;
+}
+.footer__logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 28px;
 }
 .footer__text {
-  width: 400px;
-  max-width: 100%;
+  font-size: 0.9375rem;
+  margin-bottom: 12px;
+}
+.footer__text--muted {
+  color: var(--on-night-2);
+  font: 400 var(--fs-micro) / 1.5 var(--font-mono);
+  letter-spacing: 0.06em;
+}
+.footer__heading {
+  margin-bottom: 16px;
+  font: 400 var(--fs-micro) / 1.4 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-night-2);
+}
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.footer__nav a {
+  padding: 4px 0;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .footer__nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
 }
 .footer__phone {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 .footer__rights {
-  width: 100%;
-  min-height: 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
-  gap: 8px 16px;
-  padding: 8px 0;
-  background: var(--green);
+  gap: 8px 24px;
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--night-line);
+  font-size: var(--fs-micro);
+  color: var(--on-night-2);
 }
-.footer__rights p {
-  padding: 0 33px;
-}
-.footer__rights a {
-  color: var(--black);
-}
-.btn {
-  display: inline-block;
-  font-weight: var(--font-medium);
-  padding: 14px 30px;
-  background-color: var(--green);
-  border-radius: 30px;
-  border: solid 1px var(--green);
-  margin-right: 8px;
-  transition: background-color 0.2s, border-color 0.2s;
-}
-/* O CTA principal escurece no hover em vez de "apagar" (antes ficava
-   vazado, idêntico ao botão secundário). */
-.btn:hover {
-  background-color: var(--green-hover);
-  border-color: var(--green-hover);
-}
-.btn--transparent {
-  background: 0 0;
-  border: solid 1px var(--black);
-}
-.btn--transparent:hover {
-  background-color: var(--acqua-green);
-  border-color: var(--black);
-}
-@media screen and (max-width: 576px) {
-  :root {
-    --h1-font-size: 1.75rem;
-    --h2-font-size: 1.25rem;
-    /* Público de memória/Alzheimer: texto corrido não desce de 15px e o
-       texto pequeno (botões, endereços) não desce de 12px. */
-    --p-font-size: 0.9375rem;
-    --card-font-size: 0.87rem;
-    --small-font-size: 0.75rem;
-  }
-  .line__title {
-    margin-bottom: 36px;
-  }
-  .about__info {
-    margin-bottom: 40px;
-  }
-  .footer__logo {
-    width: 240px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .nav {
-    padding: 0 30px;
-  }
-  .logo__img {
-    width: 126px;
-    height: 32px;
-  }
-  .btn {
-    padding: 12px 26px;
-  }
-}
-@media screen and (max-width: 992px) {
-  .home__img {
+
+/* --------------------------------------------------------------------------
+   Responsivo
+   -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .nav__list,
+  .nav__cta {
     display: none;
   }
-  /* Sem a ilustração, o herói tem a altura do conteúdo (não 100vh vazio). */
-  .home {
-    height: auto;
-    padding: calc(var(--nav-height) + 80px) 30px 80px;
-  }
-  .about {
-    padding: 80px 30px;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-  }
-  .about > picture {
-    flex: 0 0 auto;
-  }
-  .about__img {
-    width: 300px;
-  }
-  .about__data {
-    flex: 0 0 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .about__info {
-    width: 100%;
-    max-width: 500px;
-  }
-  .about__item {
-    width: 100%;
-  }
-  .footer__data {
-    padding: 64px 30px;
-  }
-}
-@media screen and (max-width: 1200px) {
-  /* A lista de 6 links (~760px) + logo não cabe entre 769 e 1200px:
-     abaixo disso o menu vira o botão + painel móvel. */
-  .nav__list {
-    display: none;
-  }
-  .mb__menu__icon,
-  .open {
+  .nav__toggle {
     display: block;
   }
-  .services__wrapper {
-    flex-wrap: wrap;
+  .services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .services__card {
-    flex: 0 0 219px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-height: 64px;
   }
-  .local,
-  .services {
-    padding: 80px 30px;
+  .hero {
+    justify-content: flex-end;
+    padding-bottom: 72px;
   }
-  .local__wrapper {
-    align-items: center;
+  .hero__scrim {
+    background: linear-gradient(
+      0deg,
+      var(--night) 0%,
+      rgba(7, 17, 13, 0.9) 42%,
+      rgba(7, 17, 13, 0.2) 70%,
+      rgba(7, 17, 13, 0) 100%
+    );
+  }
+  .hero__caption {
+    display: none;
+  }
+  .about__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .about__figure {
+    position: relative;
+    top: 0;
+    max-width: 420px;
+  }
+  .place {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px 16px;
+  }
+  .place__phone,
+  .place__map {
+    grid-column: 2;
+    justify-self: start;
+  }
+  .place__map {
+    margin-top: 4px;
+  }
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --fs-body: 1rem;
+  }
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+  .services__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .card {
+    min-height: 0;
+    padding: 28px 24px;
+  }
+  .card__icon {
+    margin: 28px 0 0;
+  }
+  .card__title {
+    margin-top: 24px;
+  }
+  .card--tools .card__title {
+    margin-top: 16px;
+  }
+  .axon {
+    padding-left: 32px;
+    gap: 32px;
+  }
+  .axon__node {
+    left: -32px;
+  }
+  .about__caption {
     flex-direction: column;
+    gap: 2px;
   }
-  .local__card {
-    flex: 0 0 auto;
-    width: 100%;
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr);
   }
-  .local__card__text {
-    margin-bottom: 22px;
+  .contact__actions .btn {
+    flex: 1 1 100%;
   }
-  .footer__data {
-    justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   Movimento reduzido: a coreografia colapsa em opacidade, sem deslocamento,
+   sem atrasos e sem loops contínuos.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  .footer__info {
-    text-align: center;
-    align-items: center;
+  .hero__line-inner,
+  .hero__eyebrow,
+  .hero__role,
+  .hero__lede,
+  .hero__actions,
+  .hero__crm,
+  .hero__caption {
+    animation: fade-in 400ms ease both;
   }
-  .footer__text {
-    width: auto;
-    max-width: 400px;
+  .js [data-reveal],
+  .js [data-reveal="group"] > *,
+  .js [data-reveal="axon"] .axon__item {
+    transform: none !important;
+    transition: opacity 400ms ease !important;
   }
-  .footer__rights {
-    justify-content: center;
-    text-align: center;
+  .js [data-reveal="image"] picture,
+  .js [data-reveal="image"] .about__img {
+    clip-path: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .js [data-reveal="axon"] .axon__track::before {
+    transform: none;
+    transition: none;
+  }
+  .axon__signal,
+  .axon__node::after {
+    display: none;
+  }
+  .site-header,
+  .mobile-menu,
+  .mobile-menu.is-open {
+    transition-property: opacity, color, visibility;
+  }
+  .mobile-menu {
+    transform: none;
+  }
+  .site-header.is-hidden {
+    transform: none;
+  }
+  .contact__eeg-path,
+  .card:hover .icon-neuron__spike,
+  .card:hover .icon-spectrum__wave--a,
+  .card:hover .icon-spectrum__wave--b,
+  .card:hover .icon-spectrum__wave--c,
+  .card:hover .icon-memory__trace {
+    animation: none;
+  }
+  .manifesto__word {
+    opacity: 1 !important;
+  }
+  /* A rede fica parada: o convite para mover o cursor não se aplica. */
+  .hero__caption-hint {
+    display: none;
   }
 }
